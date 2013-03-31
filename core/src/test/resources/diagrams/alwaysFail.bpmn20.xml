@@ -7,7 +7,7 @@
         <startEvent id="startevent1" name="Start"></startEvent>
         <endEvent id="endevent1" name="End"></endEvent>
         <serviceTask id="alwaysFailTask" name="Always Fail" activiti:async="true"
-                     activiti:class="com.axemblr.provisionr.core.activiti.AlwaysFailTask"></serviceTask>
+                     activiti:class="org.apache.provisionr.core.activiti.AlwaysFailTask"></serviceTask>
         <sequenceFlow id="flow1" sourceRef="startevent1" targetRef="alwaysFailTask"></sequenceFlow>
         <sequenceFlow id="flow2" sourceRef="alwaysFailTask" targetRef="endevent1"></sequenceFlow>
     </process>

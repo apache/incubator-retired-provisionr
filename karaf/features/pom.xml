@@ -15,16 +15,17 @@
   ~ limitations under the License.
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>provisionr-parent</artifactId>
-        <groupId>com.axemblr.provisionr</groupId>
+        <groupId>org.apache.provisionr</groupId>
         <version>0.4.0-SNAPSHOT</version>
         <relativePath>../../parent</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <name>Axemblr Provisionr :: Karaf Features</name>
+    <name>Apache Provisionr :: Karaf Features</name>
     <artifactId>provisionr-features</artifactId>
     <packaging>jar</packaging>
 
@@ -35,40 +36,40 @@
     <!-- Dependencies are used only for ordering the reactor -->
     <dependencies>
         <dependency>
-            <groupId>com.axemblr.provisionr</groupId>
+            <groupId>org.apache.provisionr</groupId>
             <artifactId>provisionr-amazon</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com.axemblr.provisionr</groupId>
+            <groupId>org.apache.provisionr</groupId>
             <artifactId>provisionr-cloudstack</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com.axemblr.provisionr</groupId>
+            <groupId>org.apache.provisionr</groupId>
             <artifactId>provisionr-console</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com.axemblr.provisionr</groupId>
+            <groupId>org.apache.provisionr</groupId>
             <artifactId>provisionr-rundeck</artifactId>
             <version>${project.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com.axemblr.provisionr</groupId>
+            <groupId>org.apache.provisionr</groupId>
             <artifactId>provisionr-commands</artifactId>
             <version>${project.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.activiti.karaf</groupId>
+            <groupId>org.apache.provisionr</groupId>
             <artifactId>activiti-karaf-commands</artifactId>
             <version>${project.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.activiti.karaf</groupId>
+            <groupId>org.apache.provisionr</groupId>
             <artifactId>activiti-karaf-web-explorer</artifactId>
             <version>${project.version}</version>
             <type>war</type>
@@ -161,7 +162,7 @@
                                 <descriptor>file:${project.build.directory}/features.xml</descriptor>
                             </descriptors>
                             <features>
-                                <feature>axemblr-provisionr-all</feature>
+                                <feature>provisionr-all</feature>
                             </features>
                             <repository>target/features-repo</repository>
                         </configuration>

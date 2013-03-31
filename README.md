@@ -1,5 +1,5 @@
-Axemblr Provisionr [![Build Status](https://buildhive.cloudbees.com/job/axemblr/job/axemblr-provisionr/badge/icon)](https://buildhive.cloudbees.com/job/axemblr/job/axemblr-provisionr/)
-==================
+Apache Provisionr
+=================
 
 *Simple Service for Managing Pools of 10s or 100s of Virtual Machines*
 
@@ -29,32 +29,11 @@ You can use Activiti Explorer to inspect the process while running:
 
 ![Shell](http://people.apache.org/~asavu/shell.png)
 
-Who is behind this?
--------------------
-
-Core developers:
-
-* Andrei Savu - [LinkedIn](http://www.linkedin.com/in/sandrei), [Github](https://github.com/andreisavu)
-* Ioan Eugen Stan - [LinkedIn](http://www.linkedin.com/in/ieugen), [Github](https://github.com/ieugen)
-* Alex Ciminian - [LinkedIn](http://www.linkedin.com/in/alexciminian), [GitHub](https://github.com/cimi)
-
 License
 -------
 
 Apache License Version 2.0
 http://apache.org/licenses/LICENSE-2.0.txt
-
-Get involved in the community 
------------------------------
-
-For those of you who really dig our software, we have created two mailing lists that yo can join depending on your involvement: 
-
-* If you are a user join: [provisionr-users@googlegroups.com](https://groups.google.com/forum/?fromgroups#!forum/provisionr-users)
-* If you wish to develop Provisionr go to [provisionr-dev@googlegroups.com](https://groups.google.com/forum/?fromgroups#!forum/provisionr-dev)
-
-Join us on IRC channel *#axemblr* on *irc.freenode.net*.
-
-We appreciate any kind of help so don't hesitate.
 
 
 Supported cloud providers
@@ -71,7 +50,7 @@ You can build a binary release by running:
 
 And you will find the .tar.gz file in:
 
-    karaf/assembly/target/com.axemblr.provisionr-*.tar.gz
+    karaf/assembly/target/org.apache.provisionr-*.tar.gz
 
 How to run?
 -----------
@@ -79,23 +58,23 @@ How to run?
 Extract the custom Karaf distribution:
 
     $ cd karaf/assembly/target/
-    $ tar xvfz com.axemblr.provisionr-0.0.1-SNAPSHOT.tar.gz
-    $ cd com.axemblr.provisionr-0.0.1-SNAPSHOT
+    $ tar xvfz org.apache.provisionr-0.0.1-SNAPSHOT.tar.gz
+    $ cd org.apache.provisionr-0.0.1-SNAPSHOT
 
 Start and configure the Amazon provisionr:
 
     $ ./bin/provisionr
-    provisionr [0.0.1-SNAPSHOT] $ config:edit com.axemblr.provisionr.amazon
+    provisionr [0.0.1-SNAPSHOT] $ config:edit org.apache.provisionr.amazon
     provisionr [0.0.1-SNAPSHOT] $ config:proplist
-        service.pid = com.axemblr.provisionr.amazon
+        service.pid = org.apache.provisionr.amazon
         secretKey = secret
-        felix.fileinstall.filename = file:[...]/etc/com.axemblr.provisionr.amazon.cfg
+        felix.fileinstall.filename = file:[...]/etc/org.apache.provisionr.amazon.cfg
         region = us-east-1
         accessKey = access
     provisionr [0.0.1-SNAPSHOT] $ config:propset accessKey "XXXXXXX"
     provisionr [0.0.1-SNAPSHOT] $ config:propset secretKey "XXXXXXX"
     provisionr [0.0.1-SNAPSHOT] $ config:update
-    provisionr [0.0.1-SNAPSHOT] $ config:list "(service.pid=com.axemblr.provisionr.amazon)"
+    provisionr [0.0.1-SNAPSHOT] $ config:list "(service.pid=org.apache.provisionr.amazon)"
 
 Create a pool:
 
@@ -116,8 +95,8 @@ You should see an Activiti process in execution:
     BPMN Deployments
     ----------------
      ID   Name                               Deployment Time         
-    [1  ][com.axemblr.provisionr.amazon    ][Dec 13, 2012 1:52:05 PM]
-    [5  ][com.axemblr.provisionr.cloudstack][Dec 13, 2012 1:52:07 PM]
+    [1  ][org.apache.provisionr.amazon    ][Dec 13, 2012 1:52:05 PM]
+    [5  ][org.apache.provisionr.cloudstack][Dec 13, 2012 1:52:07 PM]
 
     BPMN Process Definitions
     -------------------------

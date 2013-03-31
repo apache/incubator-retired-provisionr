@@ -58,7 +58,7 @@
         <level value="debug"/>
     </root>
 
-    <logger name="com.axemblr">
+    <logger name="org.apache.provisionr">
         <level value="info"/>
         <appender-ref ref="STDOUT"/>
     </logger>

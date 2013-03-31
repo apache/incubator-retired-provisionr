@@ -22,7 +22,7 @@
         <service-properties>
             <entry key="alias" value="/rundeck/machines.xml"/>
         </service-properties>
-        <bean class="com.axemblr.provisionr.rundeck.RundeckServlet">
+        <bean class="org.apache.provisionr.rundeck.RundeckServlet">
             <argument ref="processEngine"/>
         </bean>
     </service>

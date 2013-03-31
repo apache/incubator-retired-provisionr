@@ -16,17 +16,17 @@
   ~ limitations under the License.
   -->
 
-<features name="axemblr-provisionr-rundeck-features-${project.version}"
+<features name="provisionr-rundeck-features-${project.version}"
           xmlns="http://karaf.apache.org/xmlns/features/v1.0.0">
 
     <repository>
-        mvn:com.axemblr.provisionr/provisionr-core/${project.version}/xml/features
+        mvn:org.apache.provisionr/provisionr-core/${project.version}/xml/features
     </repository>
 
-    <feature name="axemblr-provisionr-rundeck" version="${project.version}">
+    <feature name="provisionr-rundeck" version="${project.version}">
         <feature>http</feature>
-        <feature version="${project.version}">axemblr-provisionr-core</feature>
+        <feature version="${project.version}">provisionr-core</feature>
 
-        <bundle start="true">mvn:com.axemblr.provisionr/provisionr-rundeck/${project.version}</bundle>
+        <bundle start="true">mvn:org.apache.provisionr/provisionr-rundeck/${project.version}</bundle>
     </feature>
 </features>

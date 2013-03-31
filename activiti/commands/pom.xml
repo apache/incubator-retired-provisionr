@@ -21,17 +21,17 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.axemblr.provisionr</groupId>
+        <groupId>org.apache.provisionr</groupId>
         <artifactId>provisionr-parent</artifactId>
         <version>0.4.0-SNAPSHOT</version>
         <relativePath>../../parent</relativePath>
     </parent>
 
-    <groupId>org.activiti.karaf</groupId>
     <artifactId>activiti-karaf-commands</artifactId>
     <packaging>bundle</packaging>
 
-    <name>Activiti Karaf :: Commands</name>
+    <name>Apache Provisionr :: Activiti Karaf :: Commands</name>
+    <description>Apache Karaf commands for the Activiti process engine</description>
     <url>http://activiti.org</url>
 
     <properties>
@@ -161,8 +161,8 @@
                     <outputDirectory>${basedir}/target/classes</outputDirectory>
                     <instructions>
                         <Export-Package>
-                            org.activiti.karaf.commands,
-                            org.activiti.karaf.commands.handlers,
+                            org.apache.provisionr.activiti.karaf.commands,
+                            org.apache.provisionr.activiti.karaf.commandsiti.karaf.commands.haorg.apache.provisionr.activiti.karaf.commands
                             org.activiti.karaf.commands.util
                         </Export-Package>
                         <Import-Package>

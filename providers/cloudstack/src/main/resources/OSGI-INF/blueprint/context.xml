@@ -19,7 +19,7 @@
            xmlns:shell="http://karaf.apache.org/xmlns/shell/v1.0.0"
            xmlns:cfg="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0">
 
-    <cfg:property-placeholder persistent-id="com.axemblr.provisionr.cloudstack"
+    <cfg:property-placeholder persistent-id="org.apache.provisionr.cloudstack"
                               placeholder-prefix="$(" placeholder-suffix=")" update-strategy="reload">
         <cfg:default-properties>
             <cfg:property name="endpoint" value=""/>
@@ -34,7 +34,7 @@
     <!-- Configure a DefaultProviderConfiguration via ConfigAdmin
         WARNING: Order of arguments is important.
     -->
-    <bean id="defaultProviderConfig" class="com.axemblr.provisionr.cloudstack.DefaultProviderConfig">
+    <bean id="defaultProviderConfig" class="org.apache.provisionr.cloudstack.DefaultProviderConfig">
         <argument value="$(endpoint)"/>
         <argument value="$(accessKey)"/>
         <argument value="$(secretKey)"/>
@@ -45,46 +45,46 @@
 
     <reference id="processEngine" interface="org.activiti.engine.ProcessEngine"/>
 
-    <bean id="cloudstackService" class="com.axemblr.provisionr.cloudstack.CloudStackProvisionr">
+    <bean id="cloudstackService" class="org.apache.provisionr.cloudstack.CloudStackProvisionr">
         <argument ref="processEngine"/>
         <argument ref="defaultProviderConfig"/>
     </bean>
 
-    <service ref="cloudstackService" interface="com.axemblr.provisionr.api.Provisionr"/>
+    <service ref="cloudstackService" interface="org.apache.provisionr.api.Provisionr"/>
 
     <bean id="cloudstack_ensureSecurityGroupExists"
-          class="com.axemblr.provisionr.cloudstack.activities.EnsureSecurityGroupExists"/>
+          class="org.apache.provisionr.cloudstack.activities.EnsureSecurityGroupExists"/>
     <service ref="cloudstack_ensureSecurityGroupExists"
              auto-export="interfaces"/>
 
     <bean id="cloudstack_deleteSecurityGroup"
-          class="com.axemblr.provisionr.cloudstack.activities.DeleteSecurityGroup"/>
+          class="org.apache.provisionr.cloudstack.activities.DeleteSecurityGroup"/>
     <service ref="cloudstack_deleteSecurityGroup" auto-export="interfaces">
     </service>
     <bean id="cloudstack_ensureKeyPairExists"
-          class="com.axemblr.provisionr.cloudstack.activities.EnsureKeyPairExists"/>
+          class="org.apache.provisionr.cloudstack.activities.EnsureKeyPairExists"/>
     <service ref="cloudstack_ensureKeyPairExists" auto-export="interfaces">
     </service>
 
     <bean id="cloudstack_deleteKeyPair"
-          class="com.axemblr.provisionr.cloudstack.activities.DeleteKeyPair"/>
+          class="org.apache.provisionr.cloudstack.activities.DeleteKeyPair"/>
     <service ref="cloudstack_deleteKeyPair" auto-export="interfaces">
     </service>
 
     <!-- CloudStack Karaf shell commands for discovery -->
     <shell:command-bundle>
         <shell:command name="cloudstack/zones">
-            <shell:action class="com.axemblr.provisionr.cloudstack.commands.ZonesCommand">
+            <shell:action class="org.apache.provisionr.cloudstack.commands.ZonesCommand">
                 <shell:argument ref="defaultProviderConfig"/>
             </shell:action>
         </shell:command>
         <shell:command name="cloudstack/templates">
-            <shell:action class="com.axemblr.provisionr.cloudstack.commands.TemplatesCommand">
+            <shell:action class="org.apache.provisionr.cloudstack.commands.TemplatesCommand">
                 <shell:argument ref="defaultProviderConfig"/>
             </shell:action>
         </shell:command>
         <shell:command name="cloudstack/offerings">
-            <shell:action class="com.axemblr.provisionr.cloudstack.commands.OfferingsCommand">
+            <shell:action class="org.apache.provisionr.cloudstack.commands.OfferingsCommand">
                 <shell:argument ref="defaultProviderConfig"/>
             </shell:action>
         </shell:command>

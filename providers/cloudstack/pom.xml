@@ -15,16 +15,17 @@
   ~ limitations under the License.
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>provisionr-parent</artifactId>
-        <groupId>com.axemblr.provisionr</groupId>
+        <groupId>org.apache.provisionr</groupId>
         <version>0.4.0-SNAPSHOT</version>
         <relativePath>../../parent</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <name>Axemblr Provisionr :: CloudStack</name>
+    <name>Apache Provisionr :: CloudStack</name>
     <artifactId>provisionr-cloudstack</artifactId>
     <packaging>bundle</packaging>
 
@@ -34,15 +35,15 @@
             <artifactId>slf4j-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.axemblr.provisionr</groupId>
+            <groupId>org.apache.provisionr</groupId>
             <artifactId>provisionr-core</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.axemblr.provisionr</groupId>
+            <groupId>org.apache.provisionr</groupId>
             <artifactId>provisionr-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.axemblr.provisionr</groupId>
+            <groupId>org.apache.provisionr</groupId>
             <artifactId>provisionr-test-support</artifactId>
             <scope>test</scope>
             <exclusions>
@@ -188,7 +189,7 @@
                                 </artifact>
                                 <artifact>
                                     <file>
-                                        ${project.build.directory}/classes/com.axemblr.provisionr.cloudstack.cfg
+                                        ${project.build.directory}/classes/org.apache.provisionr.cloudstack.cfg
                                     </file>
                                     <type>cfg</type>
                                     <classifier>defaults</classifier>
@@ -215,7 +216,7 @@
                                 <descriptor>file:${project.build.directory}/classes/features.xml</descriptor>
                             </descriptors>
                             <features>
-                                <feature>axemblr-provisionr-cloudstack</feature>
+                                <feature>provisionr-cloudstack</feature>
                             </features>
                             <repository>target/features-repo</repository>
                         </configuration>

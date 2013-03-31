@@ -15,19 +15,25 @@
   ~ limitations under the License.
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.axemblr.provisionr</groupId>
+    <parent>
+        <groupId>org.apache</groupId>
+        <artifactId>apache</artifactId>
+        <version>13</version>
+    </parent>
+
+    <groupId>org.apache.provisionr</groupId>
     <artifactId>provisionr-parent</artifactId>
     <version>0.4.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <modelVersion>4.0.0</modelVersion>
-
-    <name>Axemblr Provisionr :: Parent</name>
+    <name>Apache Provisionr :: Parent</name>
     <description>Pool management service for 10s or 100s of virtual machines</description>
 
-    <url>https://github.com/axemblr/axemblr-provisionr</url>
+    <url>http://provisionr.incubator.apache.org/</url>
     <inceptionYear>2012</inceptionYear>
 
     <prerequisites>
@@ -36,30 +42,81 @@
 
     <developers>
         <developer>
+            <name>Tom White</name>
+            <email>tomwhite@apache.org</email>
+            <roles>
+                <role>mentor</role>
+            </roles>
+        </developer>
+        <developer>
+            <name>Mohammad Nour</name>
+            <email>mnour@apache.org</email>
+            <roles>
+                <role>mentor</role>
+            </roles>
+        </developer>
+        <developer>
+            <name>Roman Shaposhnik</name>
+            <email>rvs@apache.org</email>
+            <roles>
+                <role>mentor</role>
+                <role>committer</role>
+            </roles>
+        </developer>
+        <developer>
             <name>Andrei Savu</name>
-            <email>asavu@axemblr.com</email>
+            <email>asavu@apache.org</email>
+            <roles>
+                <role>committer</role>
+            </roles>
         </developer>
         <developer>
             <name>Ioan Eugen Stan</name>
-            <email>ieugen@axemblr.com</email>
+            <email>ieugen@apache.org</email>
+            <roles>
+                <role>committer</role>
+            </roles>
+        </developer>
+        <developer>
+            <name>Alex Ciminian</name>
+            <email>cimi@apache.org</email>
+            <roles>
+                <role>committer</role>
+            </roles>
+        </developer>
+        <developer>
+            <name>Amandeep Khurana</name>
+            <email>ak@apache.org</email>
+            <roles>
+                <role>committer</role>
+            </roles>
+        </developer>
+        <developer>
+            <name>Eric Sammer</name>
+            <email>esammer@apache.org</email>
+            <roles>
+                <role>committer</role>
+            </roles>
         </developer>
     </developers>
 
     <organization>
-        <name>Axemblr Software Solutions</name>
-        <url>http://axemblr.com/</url>
+        <name>Apache Software Foundation</name>
+        <url>http://www.apache.org/</url>
     </organization>
 
     <scm>
-        <connection>scm:git:git@github.com:axemblr/axemblr-provisionr.git</connection>
-        <developerConnection>scm:git:git@github.com:axemblr/axemblr-provisionr.git</developerConnection>
-        <url>https://github.com/axemblr/axemblr-provisionr</url>
+        <connection>scm:git:https://git-wip-us.apache.org/repos/asf/incubator-provisionr.git</connection>
+        <developerConnection>
+            scm:git:https://git-wip-us.apache.org/repos/asf/incubator-provisionr.git
+        </developerConnection>
+        <url>https://git-wip-us.apache.org/repos/asf?p=incubator-provisionr.git</url>
         <tag>HEAD</tag>
     </scm>
 
     <issueManagement>
-        <system>github</system>
-        <url>https://github.com/axemblr/axemblr-provisionr/issues</url>
+        <system>jira</system>
+        <url>https://issues.apache.org/jira/browse/PROVISIONR</url>
     </issueManagement>
 
     <properties>
@@ -117,37 +174,37 @@
                 <version>${osgi.framework.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.axemblr.provisionr</groupId>
+                <groupId>org.apache.provisionr</groupId>
                 <artifactId>provisionr-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.axemblr.provisionr</groupId>
+                <groupId>org.apache.provisionr</groupId>
                 <artifactId>provisionr-core</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.axemblr.provisionr</groupId>
+                <groupId>org.apache.provisionr</groupId>
                 <artifactId>provisionr-console</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.axemblr.provisionr</groupId>
+                <groupId>org.apache.provisionr</groupId>
                 <artifactId>provisionr-features</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.axemblr.provisionr</groupId>
+                <groupId>org.apache.provisionr</groupId>
                 <artifactId>provisionr-amazon</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.axemblr.provisionr</groupId>
+                <groupId>org.apache.provisionr</groupId>
                 <artifactId>provisionr-cloudstack</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.axemblr.provisionr</groupId>
+                <groupId>org.apache.provisionr</groupId>
                 <artifactId>provisionr-branding</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -202,7 +259,7 @@
                 <version>${h2.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.axemblr.provisionr</groupId>
+                <groupId>org.apache.provisionr</groupId>
                 <artifactId>provisionr-test-support</artifactId>
                 <version>${project.version}</version>
                 <scope>test</scope>
@@ -261,19 +318,6 @@
             <!-- ImageScalr -->
         </repository>
     </repositories>
-
-    <distributionManagement>
-        <snapshotRepository>
-            <id>axemblr-snapshots</id>
-            <name>Axemblr Internal Snapshots</name>
-            <url>http://decebal.axemblr.com/nexus/content/repositories/snapshots</url>
-        </snapshotRepository>
-        <repository>
-            <id>axemblr-releases</id>
-            <name>Axemblr Internal Releases</name>
-            <url>http://decebal.axemblr.com/nexus/content/repositories/releases</url>
-        </repository>
-    </distributionManagement>
 
     <build>
         <plugins>

@@ -17,13 +17,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.axemblr.provisionr</groupId>
+        <groupId>org.apache.provisionr</groupId>
         <artifactId>provisionr-parent</artifactId>
         <version>0.4.0-SNAPSHOT</version>
         <relativePath>../parent</relativePath>
     </parent>
 
-    <name>Axemblr Provisionr :: API</name>
+    <name>Apache Provisionr :: API</name>
     <artifactId>provisionr-api</artifactId>
     <packaging>bundle</packaging>
 
@@ -53,7 +53,7 @@
                     <outputDirectory>${basedir}/target/classes</outputDirectory>
                     <instructions>
                         <Fragment-Host>org.activiti.engine</Fragment-Host>
-                        <Export-Package>com.axemblr.provisionr.api*</Export-Package>
+                        <Export-Package>org.apache.provisionr.api*</Export-Package>
                         <Private-Package>!*</Private-Package>
                     </instructions>
                 </configuration>

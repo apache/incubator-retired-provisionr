@@ -22,67 +22,67 @@
            xmlns:cfg="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.0.0">
     <shell:command-bundle>
         <shell:command name="activiti/list">
-            <shell:action class="org.activiti.karaf.commands.ListActivitiCommand">
+            <shell:action class="org.apache.provisionr.activiti.karaf.commands.ListActivitiCommand">
                 <shell:property name="processEngine" ref="processEngineRef"/>
             </shell:action>
         </shell:command>
         <shell:command name="activiti/start">
-            <shell:action class="org.activiti.karaf.commands.StartActivitiCommand">
+            <shell:action class="org.apache.provisionr.activiti.karaf.commands.StartActivitiCommand">
                 <shell:property name="processEngine" ref="processEngineRef"/>
             </shell:action>
         </shell:command>
         <shell:command name="activiti/kill">
-            <shell:action class="org.activiti.karaf.commands.KillActivitiCommand">
+            <shell:action class="org.apache.provisionr.activiti.karaf.commands.KillActivitiCommand">
                 <shell:property name="processEngine" ref="processEngineRef"/>
             </shell:action>
         </shell:command>
         <shell:command name="activiti/signal">
-            <shell:action class="org.activiti.karaf.commands.SignalActivitiCommand">
+            <shell:action class="org.apache.provisionr.activiti.karaf.commands.SignalActivitiCommand">
                 <shell:property name="processEngine" ref="processEngineRef"/>
             </shell:action>
         </shell:command>
         <shell:command name="activiti/undeploy">
-            <shell:action class="org.activiti.karaf.commands.UndeployActivitiCommand">
+            <shell:action class="org.apache.provisionr.activiti.karaf.commands.UndeployActivitiCommand">
                 <shell:property name="processEngine" ref="processEngineRef"/>
             </shell:action>
         </shell:command>
         <shell:command name="activiti/clean-history">
-            <shell:action class="org.activiti.karaf.commands.CleanHistoryActivitiCommand">
+            <shell:action class="org.apache.provisionr.activiti.karaf.commands.CleanHistoryActivitiCommand">
                 <shell:property name="processEngine" ref="processEngineRef"/>
             </shell:action>
         </shell:command>
         <shell:command name="activiti/info">
-            <shell:action class="org.activiti.karaf.commands.InfoActivitiCommand">
+            <shell:action class="org.apache.provisionr.activiti.karaf.commands.InfoActivitiCommand">
                 <shell:property name="processEngine" ref="processEngineRef"/>
             </shell:action>
         </shell:command>
         <shell:command name="activiti/add-user">
-            <shell:action class="org.activiti.karaf.commands.AddUserCommand">
+            <shell:action class="org.apache.provisionr.activiti.karaf.commands.AddUserCommand">
                 <shell:property name="processEngine" ref="processEngineRef"/>
             </shell:action>
         </shell:command>
         <shell:command name="activiti/delete-user">
-            <shell:action class="org.activiti.karaf.commands.DeleteUserCommand">
+            <shell:action class="org.apache.provisionr.activiti.karaf.commands.DeleteUserCommand">
                 <shell:property name="processEngine" ref="processEngineRef"/>
             </shell:action>
         </shell:command>
         <shell:command name="activiti/add-group">
-            <shell:action class="org.activiti.karaf.commands.AddGroupCommand">
+            <shell:action class="org.apache.provisionr.activiti.karaf.commands.AddGroupCommand">
                 <shell:property name="processEngine" ref="processEngineRef"/>
             </shell:action>
         </shell:command>
         <shell:command name="activiti/delete-group">
-            <shell:action class="org.activiti.karaf.commands.DeleteGroupCommand">
+            <shell:action class="org.apache.provisionr.activiti.karaf.commands.DeleteGroupCommand">
                 <shell:property name="processEngine" ref="processEngineRef"/>
             </shell:action>
         </shell:command>
         <shell:command name="activiti/list-groups">
-            <shell:action class="org.activiti.karaf.commands.ListGroupsCommand">
+            <shell:action class="org.apache.provisionr.activiti.karaf.commands.ListGroupsCommand">
                 <shell:property name="processEngine" ref="processEngineRef"/>
             </shell:action>
         </shell:command>
         <shell:command name="activiti/list-users">
-            <shell:action class="org.activiti.karaf.commands.ListUsersCommand">
+            <shell:action class="org.apache.provisionr.activiti.karaf.commands.ListUsersCommand">
                 <shell:property name="processEngine" ref="processEngineRef"/>
             </shell:action>
         </shell:command>

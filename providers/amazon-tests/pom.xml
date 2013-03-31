@@ -15,25 +15,26 @@
   ~ limitations under the License.
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>provisionr-parent</artifactId>
-        <groupId>com.axemblr.provisionr</groupId>
+        <groupId>org.apache.provisionr</groupId>
         <version>0.4.0-SNAPSHOT</version>
         <relativePath>../../parent/pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <name>Axemblr Provisionr :: Amazon Integration Tests</name>
+    <name>Apache Provisionr :: Amazon Integration Tests</name>
     <artifactId>provisionr-amazon-tests</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>com.axemblr.provisionr</groupId>
+            <groupId>org.apache.provisionr</groupId>
             <artifactId>provisionr-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.axemblr.provisionr</groupId>
+            <groupId>org.apache.provisionr</groupId>
             <artifactId>provisionr-amazon</artifactId>
         </dependency>
         <dependency>
@@ -41,11 +42,11 @@
             <artifactId>activiti-engine</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.axemblr.provisionr</groupId>
+            <groupId>org.apache.provisionr</groupId>
             <artifactId>provisionr-features</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.axemblr.provisionr</groupId>
+            <groupId>org.apache.provisionr</groupId>
             <artifactId>provisionr-test-support</artifactId>
         </dependency>
     </dependencies>

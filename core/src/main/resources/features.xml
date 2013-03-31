@@ -16,7 +16,7 @@
   ~ limitations under the License.
   -->
 
-<features name="axemblr-provisionr-core-features-${project.version}"
+<features name="provisionr-core-features-${project.version}"
           xmlns="http://karaf.apache.org/xmlns/features/v1.0.0">
 
     <feature name="activiti-karaf" version="${activiti.version}">
@@ -36,7 +36,7 @@
         <bundle start="true">mvn:org.activiti/activiti-osgi/${activiti.version}</bundle>
     </feature>
 
-    <feature name="axemblr-provisionr-core" version="${project.version}">
+    <feature name="provisionr-core" version="${project.version}">
         <feature version="${activiti.version}">activiti-karaf</feature>
 
         <bundle dependency="true">mvn:com.google.code.gson/gson/${gson.version}</bundle>
@@ -46,29 +46,31 @@
         <bundle dependency="true">
             mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.jzlib/${jzlib.bundle.version}
         </bundle>
-        <bundle dependency="true">wrap:mvn:com.github.spullara.mustache.java/compiler/${mustache.version}</bundle>
+        <bundle dependency="true">
+            wrap:mvn:com.github.spullara.mustache.java/compiler/${mustache.version}
+        </bundle>
 
-        <bundle start="true">mvn:com.axemblr.provisionr/provisionr-api/${project.version}</bundle>
-        <bundle start="true">mvn:com.axemblr.provisionr/provisionr-core/${project.version}</bundle>
+        <bundle start="true">mvn:org.apache.provisionr/provisionr-api/${project.version}</bundle>
+        <bundle start="true">mvn:org.apache.provisionr/provisionr-core/${project.version}</bundle>
 
-        <configfile finalname="/etc/com.axemblr.provisionr.cfg">
-            mvn:com.axemblr.provisionr/provisionr-core/${project.version}/cfg/defaults
+        <configfile finalname="/etc/org.apache.provisionr.cfg">
+            mvn:org.apache.provisionr/provisionr-core/${project.version}/cfg/defaults
         </configfile>
 
         <configfile finalname="/etc/org.apache.felix.fileinstall-templates.cfg">
-            mvn:com.axemblr.provisionr/provisionr-core/${project.version}/cfg/fileinstall
+            mvn:org.apache.provisionr/provisionr-core/${project.version}/cfg/fileinstall
         </configfile>
 
         <configfile finalname="/templates/cdh3.xml">
-            mvn:com.axemblr.provisionr/provisionr-core/${project.version}/template/cdh3
+            mvn:org.apache.provisionr/provisionr-core/${project.version}/template/cdh3
         </configfile>
 
         <configfile finalname="/templates/cdh4.xml">
-            mvn:com.axemblr.provisionr/provisionr-core/${project.version}/template/cdh4
+            mvn:org.apache.provisionr/provisionr-core/${project.version}/template/cdh4
         </configfile>
 
         <configfile finalname="/templates/jenkins.xml">
-            mvn:com.axemblr.provisionr/provisionr-core/${project.version}/template/jenkins
+            mvn:org.apache.provisionr/provisionr-core/${project.version}/template/jenkins
         </configfile>
     </feature>
 </features>

@@ -18,18 +18,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>provisionr-parent</artifactId>
-        <groupId>com.axemblr.provisionr</groupId>
+        <groupId>org.apache.provisionr</groupId>
         <version>0.4.0-SNAPSHOT</version>
         <relativePath>../parent/pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <name>Axemblr Provisionr :: Test Support</name>
+    <name>Apache Provisionr :: Test Support</name>
     <artifactId>provisionr-test-support</artifactId>
     <packaging>bundle</packaging>
 
     <properties>
-        <osgi.export>com.axemblr.provisionr.test*</osgi.export>
+        <osgi.export>org.apache.provisionr.test*</osgi.export>
         <osgi.import>
             org.mockito*;resolution:=optional,
             *
@@ -42,7 +42,7 @@
             <artifactId>org.osgi.core</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.axemblr.provisionr</groupId>
+            <groupId>org.apache.provisionr</groupId>
             <artifactId>provisionr-api</artifactId>
         </dependency>
         <dependency>
@@ -168,7 +168,7 @@
                 </configuration>
             </plugin>
             <!--
-             features:addurl mvn:com.axemblr.provisionr/provisionr-features/0.0.1-SNAPSHOT/xml/features
+             features:addurl mvn:org.apache.provisionr/provisionr-features/0.0.1-SNAPSHOT/xml/features
              features:install <feature-name>
              -->
             <plugin>

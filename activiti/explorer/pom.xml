@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <!--
         Copyright 2012 Cisco Systems
         
@@ -21,17 +22,16 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.axemblr.provisionr</groupId>
+        <groupId>org.apache.provisionr</groupId>
         <artifactId>provisionr-parent</artifactId>
         <version>0.4.0-SNAPSHOT</version>
         <relativePath>../../parent</relativePath>
     </parent>
 
-    <groupId>org.activiti.karaf</groupId>
     <artifactId>activiti-karaf-web-explorer</artifactId>
     <packaging>war</packaging>
 
-    <name>Activiti Karaf :: Web Explorer</name>
+    <name>Apache Provisionr :: Activiti Karaf :: Explorer</name>
     <description>Activiti Explorer Web Application As OGSi War</description>
     <url>http://activiti.org</url>
 
@@ -270,7 +270,8 @@
                         <Bundle-ClassPath>.,WEB-INF/classes</Bundle-ClassPath>
                         <Webapp-Context>activiti-explorer</Webapp-Context>
                         <Bundle-Name>${project.name}</Bundle-Name>
-                        <Import-Package>org.activiti.osgi*;resolution:=optional, ${activiti.osgi.import}</Import-Package>
+                        <Import-Package>org.activiti.osgi*;resolution:=optional, ${activiti.osgi.import}
+                        </Import-Package>
                         <DynamicImport-Package>${activiti.osgi.dynamic}</DynamicImport-Package>
                         <Include-Resource>${activiti.osgi.include.resource}</Include-Resource>
                     </instructions>

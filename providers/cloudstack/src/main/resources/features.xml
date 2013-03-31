@@ -16,23 +16,23 @@
   ~ limitations under the License.
   -->
 
-<features name="axemblr-provisionr-cloudstack-features-${project.version}"
+<features name="provisionr-cloudstack-features-${project.version}"
           xmlns="http://karaf.apache.org/xmlns/features/v1.0.0">
 
     <repository>
-        mvn:com.axemblr.provisionr/provisionr-core/${project.version}/xml/features
+        mvn:org.apache.provisionr/provisionr-core/${project.version}/xml/features
     </repository>
     <repository>
         mvn:org.jclouds.karaf/jclouds-karaf/${jclouds.karaf.version}/xml/features
     </repository>
 
-    <feature name="axemblr-provisionr-cloudstack" version="${project.version}">
+    <feature name="provisionr-cloudstack" version="${project.version}">
         <feature version="${jclouds.karaf.version}">jclouds-api-cloudstack</feature>
-        <feature version="${project.version}">axemblr-provisionr-core</feature>
-        <bundle start="true">mvn:com.axemblr.provisionr/provisionr-cloudstack/${project.version}</bundle>
+        <feature version="${project.version}">provisionr-core</feature>
+        <bundle start="true">mvn:org.apache.provisionr/provisionr-cloudstack/${project.version}</bundle>
 
-        <configfile finalname="/etc/com.axemblr.provisionr.cloudstack.cfg">
-            mvn:com.axemblr.provisionr/provisionr-cloudstack/${project.version}/cfg/defaults
+        <configfile finalname="/etc/org.apache.provisionr.cloudstack.cfg">
+            mvn:org.apache.provisionr/provisionr-cloudstack/${project.version}/cfg/defaults
         </configfile>
     </feature>
 

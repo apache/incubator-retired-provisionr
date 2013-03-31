@@ -21,7 +21,7 @@
 
     <feature name="provisionr-test-support" version="${project.version}">
         <bundle dependency="true">mvn:com.google.guava/guava/${guava.version}</bundle>
-        <bundle>mvn:com.axemblr.provisionr/provisionr-test-support/${project.version}</bundle>
+        <bundle>mvn:org.apache.provisionr/provisionr-test-support/${project.version}</bundle>
     </feature>
 
 </features>

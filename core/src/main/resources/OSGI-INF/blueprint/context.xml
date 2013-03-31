@@ -17,10 +17,10 @@
 <blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
            xmlns:cfg="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0">
 
-    <cfg:property-placeholder persistent-id="com.axemblr.provisionr"
+    <cfg:property-placeholder persistent-id="org.apache.provisionr"
                               placeholder-prefix="$(" placeholder-suffix=")" update-strategy="reload">
         <cfg:default-properties>
-            <cfg:property name="activiti.db.url" value="jdbc:h2:mem:axemblr;MVCC=TRUE;DB_CLOSE_DELAY=-1"/>
+            <cfg:property name="activiti.db.url" value="jdbc:h2:mem:provisionr;MVCC=TRUE;DB_CLOSE_DELAY=-1"/>
             <cfg:property name="activiti.db.user" value="sa"/>
             <cfg:property name="activiti.db.password" value=""/>
             <cfg:property name="activiti.db.schemaUpdate" value="true"/>
@@ -53,12 +53,12 @@
     </bean>
 
     <bean id="configurableFailedJobCommandFactory"
-          class="com.axemblr.provisionr.core.activiti.ConfigurableFailedJobCommandFactory">
+          class="org.apache.provisionr.core.activiti.ConfigurableFailedJobCommandFactory">
         <argument value="$(activiti.job.maxNumberOfRetries)"/>
         <argument value="$(activiti.job.timeBetweenRetriesInSeconds)"/>
     </bean>
 
-    <bean id="configurationFactory" class="com.axemblr.provisionr.core.activiti.ConfigurationFactory">
+    <bean id="configurationFactory" class="org.apache.provisionr.core.activiti.ConfigurationFactory">
         <property name="dataSource" ref="dataSource"/>
         <property name="databaseSchemaUpdate" value="$(activiti.db.schemaUpdate)"/>
         <property name="jobExecutorActivate" value="true"/>
@@ -100,26 +100,26 @@
     <bean id="bouncyCastleAsJceProviderRegistration" class="net.schmizz.sshj.common.SecurityUtils"
           factory-method="getSecurityProvider"/>
 
-    <bean id="poolTemplateInstaller" class="com.axemblr.provisionr.core.templates.PoolTemplateInstaller">
+    <bean id="poolTemplateInstaller" class="org.apache.provisionr.core.templates.PoolTemplateInstaller">
         <argument ref="blueprintBundleContext"/>
     </bean>
     <service ref="poolTemplateInstaller" auto-export="interfaces"/>
 
     <!-- Reusable Activiti activities -->
 
-    <bean id="checkSshPortIsOpen" class="com.axemblr.provisionr.core.activities.IsMachinePortOpen">
+    <bean id="checkSshPortIsOpen" class="org.apache.provisionr.core.activities.IsMachinePortOpen">
         <argument value="sshPortIsOpen"/>
         <argument value="22"/>
     </bean>
     <service ref="checkSshPortIsOpen" auto-export="interfaces"/>
 
-    <bean id="installRepositories" class="com.axemblr.provisionr.core.activities.InstallRepositories"/>
+    <bean id="installRepositories" class="org.apache.provisionr.core.activities.InstallRepositories"/>
     <service ref="installRepositories" auto-export="interfaces"/>
 
-    <bean id="installPackages" class="com.axemblr.provisionr.core.activities.InstallPackages"/>
+    <bean id="installPackages" class="org.apache.provisionr.core.activities.InstallPackages"/>
     <service ref="installPackages" auto-export="interfaces"/>
 
-    <bean id="downloadFiles" class="com.axemblr.provisionr.core.activities.DownloadFiles"/>
+    <bean id="downloadFiles" class="org.apache.provisionr.core.activities.DownloadFiles"/>
     <service ref="downloadFiles" auto-export="interfaces"/>
 
 </blueprint>

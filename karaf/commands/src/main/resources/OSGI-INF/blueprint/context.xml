@@ -19,44 +19,44 @@
            xmlns:shell="http://karaf.apache.org/xmlns/shell/v1.0.0"
         >
 
-    <reference-list id="provisionrServices" interface="com.axemblr.provisionr.api.Provisionr"
+    <reference-list id="provisionrServices" interface="org.apache.provisionr.api.Provisionr"
                     availability="optional" activation="eager"/>
 
-    <reference-list id="templates" interface="com.axemblr.provisionr.core.templates.PoolTemplate"
+    <reference-list id="templates" interface="org.apache.provisionr.core.templates.PoolTemplate"
                     availability="optional" activation="eager"/>
 
     <reference id="processEngine" interface="org.activiti.engine.ProcessEngine"/>
 
     <shell:command-bundle>
         <shell:command name="provisionr/services">
-            <shell:action class="com.axemblr.provisionr.commands.ListServicesCommand">
+            <shell:action class="org.apache.provisionr.commands.ListServicesCommand">
                 <shell:argument ref="provisionrServices"/>
             </shell:action>
         </shell:command>
         <shell:command name="provisionr/pools">
-            <shell:action class="com.axemblr.provisionr.commands.ListPoolsCommand">
+            <shell:action class="org.apache.provisionr.commands.ListPoolsCommand">
                 <shell:argument ref="processEngine"/>
             </shell:action>
         </shell:command>
         <shell:command name="provisionr/templates">
-            <shell:action class="com.axemblr.provisionr.commands.ListTemplatesCommand">
+            <shell:action class="org.apache.provisionr.commands.ListTemplatesCommand">
                 <shell:argument ref="templates"/>
             </shell:action>
         </shell:command>
         <shell:command name="provisionr/create">
-            <shell:action class="com.axemblr.provisionr.commands.CreatePoolCommand">
+            <shell:action class="org.apache.provisionr.commands.CreatePoolCommand">
                 <shell:argument ref="provisionrServices"/>
                 <shell:argument ref="templates"/>
             </shell:action>
         </shell:command>
         <shell:command name="provisionr/destroy">
-            <shell:action class="com.axemblr.provisionr.commands.DestroyPoolCommand">
+            <shell:action class="org.apache.provisionr.commands.DestroyPoolCommand">
                 <shell:argument ref="provisionrServices"/>
                 <shell:argument ref="processEngine"/>
             </shell:action>
         </shell:command>
         <shell:command name="provisionr/reset-retries">
-            <shell:action class="com.axemblr.provisionr.commands.ResetRetriesCommand">
+            <shell:action class="org.apache.provisionr.commands.ResetRetriesCommand">
                 <shell:argument ref="processEngine"/>
             </shell:action>
         </shell:command>

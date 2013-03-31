@@ -15,16 +15,17 @@
   ~ limitations under the License.
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <groupId>com.axemblr.provisionr</groupId>
+        <groupId>org.apache.provisionr</groupId>
         <artifactId>provisionr-parent</artifactId>
         <version>0.4.0-SNAPSHOT</version>
         <relativePath>../parent</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <name>Axemblr Provisionr :: Web Console &amp; REST API</name>
+    <name>Apache Provisionr :: Web Console &amp; REST API</name>
     <description>A basic web console and a REST API</description>
 
     <artifactId>provisionr-console</artifactId>
@@ -32,11 +33,11 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.axemblr.provisionr</groupId>
+            <groupId>org.apache.provisionr</groupId>
             <artifactId>provisionr-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.axemblr.provisionr</groupId>
+            <groupId>org.apache.provisionr</groupId>
             <artifactId>provisionr-core</artifactId>
         </dependency>
     </dependencies>
@@ -74,7 +75,7 @@
                                     <classifier>features</classifier>
                                 </artifact>
                                 <artifact>
-                                    <file>${project.build.directory}/classes/com.axemblr.provisionr.console.cfg</file>
+                                    <file>${project.build.directory}/classes/org.apache.provisionr.console.cfg</file>
                                     <type>cfg</type>
                                     <classifier>defaults</classifier>
                                 </artifact>
@@ -100,7 +101,7 @@
                                 <descriptor>file:${project.build.directory}/classes/features.xml</descriptor>
                             </descriptors>
                             <features>
-                                <feature>axemblr-provisionr-console</feature>
+                                <feature>provisionr-console</feature>
                             </features>
                             <repository>target/features-repo</repository>
                         </configuration>

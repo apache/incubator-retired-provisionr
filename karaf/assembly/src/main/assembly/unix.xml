@@ -110,7 +110,7 @@
             <outputFileNameMapping>provisionr-version.jar</outputFileNameMapping>
             <fileMode>0644</fileMode>
             <includes>
-                <include>com.axemblr.provisionr:provisionr-branding</include>
+                <include>org.apache.provisionr:provisionr-branding</include>
             </includes>
             <useTransitiveDependencies>false</useTransitiveDependencies>
         </dependencySet>

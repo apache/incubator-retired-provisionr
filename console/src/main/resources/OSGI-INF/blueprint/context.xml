@@ -18,7 +18,7 @@
            xmlns:cxf="http://cxf.apache.org/blueprint/core"
            xmlns:jaxrs="http://cxf.apache.org/blueprint/jaxrs">
 
-    <reference-list id="provisionrs" interface="com.axemblr.provisionr.api.Provisionr"/>
+    <reference-list id="providers" interface="org.apache.provisionr.api.Provisionr"/>
 
     <cxf:bus>
         <cxf:features>
@@ -32,8 +32,8 @@
     <!--</jaxrs:serviceBeans>-->
     <!--</jaxrs:server>-->
 
-    <bean id="poolClient" class="com.axemblr.provisionr.client.ProvisionrClient">
-        <argument ref="provisionrs"/>
+    <bean id="poolClient" class="org.apache.provisionr.client.ProvisionrClient">
+        <argument ref="providers"/>
     </bean>
 
 </blueprint>

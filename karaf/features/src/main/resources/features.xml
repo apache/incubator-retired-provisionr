@@ -16,63 +16,65 @@
   ~ limitations under the License.
   -->
 
-<features name="axemblr-provisionr-features-${project.version}" xmlns="http://karaf.apache.org/xmlns/features/v1.0.0">
+<features name="provisionr-features-${project.version}" xmlns="http://karaf.apache.org/xmlns/features/v1.0.0">
 
     <feature name="activiti-karaf-commands" version="${project.version}">
         <bundle dependency="true">mvn:com.google.code.gson/gson/${gson.version}</bundle>
-        <bundle start="true">mvn:org.activiti.karaf/activiti-karaf-commands/${project.version}</bundle>
+        <bundle start="true">
+            mvn:org.apache.provisionr/activiti-karaf-commands/${project.version}
+        </bundle>
     </feature>
 
     <feature name="activiti-karaf-web-explorer" version="${project.version}">
         <feature>war</feature>
         <feature>jpa</feature>
 
+        <feature>spring</feature>
+        <feature>spring-jdbc</feature>
+        <feature>spring-orm</feature>
+
+        <feature>spring-dm</feature>
+        <feature>spring-dm-web</feature>
+
         <bundle>mvn:commons-io/commons-io/2.0.1</bundle>
         <bundle>mvn:commons-fileupload/commons-fileupload/1.2.2</bundle>
         <bundle>mvn:org.codehaus.jackson/jackson-core-asl/1.4.3</bundle>
         <bundle>mvn:org.codehaus.jackson/jackson-mapper-asl/1.4.3</bundle>
 
-        <feature version="${spring.version}">spring</feature>
-        <feature version="${spring.version}">spring-jdbc</feature>
-        <feature version="${spring.version}">spring-orm</feature>
-
-        <feature version="${spring.osgi.version}">spring-dm</feature>
-        <feature version="${spring.osgi.version}">spring-dm-web</feature>
-
         <bundle start="true">mvn:com.vaadin/vaadin/${vaadin.version}</bundle>
         <bundle start="true">wrap:mvn:com.thebuzzmedia/imgscalr-lib/3.1</bundle>
-        <bundle start="true">mvn:org.activiti.karaf/activiti-karaf-web-explorer/${version}/war</bundle>
+        <bundle start="true">mvn:org.apache.provisionr/activiti-karaf-web-explorer/${version}/war</bundle>
     </feature>
 
     <repository>
-        mvn:com.axemblr.provisionr/provisionr-core/${project.version}/xml/features
+        mvn:org.apache.provisionr/provisionr-core/${project.version}/xml/features
     </repository>
     <repository>
-        mvn:com.axemblr.provisionr/provisionr-console/${project.version}/xml/features
+        mvn:org.apache.provisionr/provisionr-console/${project.version}/xml/features
     </repository>
     <repository>
-        mvn:com.axemblr.provisionr/provisionr-amazon/${project.version}/xml/features
+        mvn:org.apache.provisionr/provisionr-amazon/${project.version}/xml/features
     </repository>
     <repository>
-        mvn:com.axemblr.provisionr/provisionr-cloudstack/${project.version}/xml/features
+        mvn:org.apache.provisionr/provisionr-cloudstack/${project.version}/xml/features
     </repository>
     <repository>
-        mvn:com.axemblr.provisionr/provisionr-rundeck/${project.version}/xml/features
+        mvn:org.apache.provisionr/provisionr-rundeck/${project.version}/xml/features
     </repository>
 
-    <feature name="axemblr-provisionr-commands" version="${project.version}">
-        <bundle start="true">mvn:com.axemblr.provisionr/provisionr-commands/${project.version}</bundle>
+    <feature name="provisionr-commands" version="${project.version}">
+        <bundle start="true">mvn:org.apache.provisionr/provisionr-commands/${project.version}</bundle>
     </feature>
 
-    <feature name="axemblr-provisionr-all" version="${project.version}">
-        <feature version="${project.version}">axemblr-provisionr-core</feature>
-        <feature version="${project.version}">axemblr-provisionr-rundeck</feature>
+    <feature name="provisionr-all" version="${project.version}">
+        <feature version="${project.version}">provisionr-core</feature>
+        <feature version="${project.version}">provisionr-rundeck</feature>
 
-        <feature version="${project.version}">axemblr-provisionr-commands</feature>
-        <feature version="${project.version}">axemblr-provisionr-amazon</feature>
+        <feature version="${project.version}">provisionr-commands</feature>
+        <feature version="${project.version}">provisionr-amazon</feature>
 
-        <!--<feature version="${project.version}">axemblr-provisionr-console</feature>-->
-        <!--<feature version="${project.version}">axemblr-provisionr-cloudstack</feature>-->
+        <!--<feature version="${project.version}">provisionr-console</feature>-->
+        <!--<feature version="${project.version}">provisionr-cloudstack</feature>-->
 
         <feature version="${project.version}">activiti-karaf-commands</feature>
         <feature version="${project.version}">activiti-karaf-web-explorer</feature>
