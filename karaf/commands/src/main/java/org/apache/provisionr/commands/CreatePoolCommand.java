@@ -74,8 +74,9 @@ public class CreatePoolCommand extends CreateCommand {
         "or not. If creating the machines from an existent image, software might already be installed.")
     private boolean cachedImage = false;
 
-    public CreatePoolCommand(List<Provisionr> services, List<PoolTemplate> templates) {
-        super(services, templates);
+    public CreatePoolCommand(List<Provisionr> services, List<PoolTemplate> templates,
+                             String publicKeyPath, String privateKeyPath) {
+        super(services, templates, publicKeyPath, privateKeyPath);
     }
 
     @Override

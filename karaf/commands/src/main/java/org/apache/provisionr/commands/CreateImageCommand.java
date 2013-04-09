@@ -16,8 +16,9 @@ public class CreateImageCommand extends CreateCommand {
     // TODO: remove this and use a provided parameter
     private static final String HARDWARE_TYPE = "t1.micro";
 
-    public CreateImageCommand(List<Provisionr> services, List<PoolTemplate> templates) {
-        super(services, templates);
+    public CreateImageCommand(List<Provisionr> services, List<PoolTemplate> templates,
+                              String publicKeyPath, String privateKeyPath) {
+        super(services, templates, publicKeyPath, privateKeyPath);
     }
 
     @Override

@@ -17,7 +17,18 @@
 
 <blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
            xmlns:shell="http://karaf.apache.org/xmlns/shell/v1.0.0"
-        >
+           xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0"
+           xmlns:ext="http://aries.apache.org/blueprint/xmlns/blueprint-ext/v1.0.0">
+
+    <!-- Allow usage of System properties, especially the karaf.base property -->
+    <ext:property-placeholder placeholder-prefix="$[" placeholder-suffix="]"/>
+
+    <cm:property-placeholder persistent-id="org.apache.provisionr.core" update-strategy="reload">
+        <cm:default-properties>
+            <cm:property name="privateKeyPath" value="$[user.home]/.ssh/id_rsa"/>
+            <cm:property name="publicKeyPath" value="$[user.home]/.ssh/id_rsa.pub"/>
+        </cm:default-properties>
+    </cm:property-placeholder>
 
     <reference-list id="provisionrServices" interface="org.apache.provisionr.api.Provisionr"
                     availability="optional" activation="eager"/>
@@ -47,6 +58,8 @@
             <shell:action class="org.apache.provisionr.commands.CreatePoolCommand">
                 <shell:argument ref="provisionrServices"/>
                 <shell:argument ref="templates"/>
+                <shell:argument value="${publicKeyPath}"/>
+                <shell:argument value="${privateKeyPath}"/>
             </shell:action>
         </shell:command>
         <shell:command name="provisionr/destroy">

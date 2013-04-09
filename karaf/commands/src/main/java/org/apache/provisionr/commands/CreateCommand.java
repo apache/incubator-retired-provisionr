@@ -42,13 +42,25 @@ public abstract class CreateCommand extends OsgiCommandSupport {
         "If not specified, defaults to 600 seconds.")
     protected int bootstrapTimeout = 600;
 
+    @Option(name = "--public-key-path", description = "Path to the public key. " +
+        "The default value can be overridden in org.apache.provisionr.core")
+    private String publicKeyPath;
+
+    @Option(name = "--private-key-path", description = "Path to the private key. " +
+        "The default value can be overridden in org.apache.provisionr.core")
+    private String privateKeyPath;
+
     protected final List<Provisionr> services;
 
     protected final List<PoolTemplate> templates;
 
-    public CreateCommand(List<Provisionr> services, List<PoolTemplate> templates) {
+    public CreateCommand(List<Provisionr> services, List<PoolTemplate> templates,
+                         String publicKeyPath, String privateKeyPath) {
         this.services = checkNotNull(services, "services is null");
         this.templates = checkNotNull(templates, "templates is null");
+
+        this.publicKeyPath = checkNotNull(publicKeyPath, "publicKeyPath is null");
+        this.privateKeyPath = checkNotNull(privateKeyPath, "privateKeyPath is null");
     }
 
     @VisibleForTesting
@@ -67,12 +79,25 @@ public abstract class CreateCommand extends OsgiCommandSupport {
     }
 
     @VisibleForTesting
-    AdminAccess collectCurrentUserCredentialsForAdminAccess() {
-        String userHome = System.getProperty("user.home");
+    void setBootstrapTimeout(int bootstrapTimeout) {
+        this.bootstrapTimeout = bootstrapTimeout;
+    }
 
+    @VisibleForTesting
+    void setPublicKeyPath(String publicKeyPath) {
+        this.publicKeyPath = checkNotNull(publicKeyPath, "publicKeyPath is null");
+    }
+
+    @VisibleForTesting
+    void setPrivateKeyPath(String privateKeyPath) {
+        this.privateKeyPath = checkNotNull(privateKeyPath, "privateKeyPath is null");
+    }
+
+    @VisibleForTesting
+    AdminAccess collectCurrentUserCredentialsForAdminAccess() {
         try {
-            String publicKey = Files.toString(new File(userHome, ".ssh/id_rsa.pub"), Charsets.UTF_8);
-            String privateKey = Files.toString(new File(userHome, ".ssh/id_rsa"), Charsets.UTF_8);
+            String publicKey = Files.toString(new File(publicKeyPath), Charsets.UTF_8);
+            String privateKey = Files.toString(new File(privateKeyPath), Charsets.UTF_8);
 
             return AdminAccess.builder().username(System.getProperty("user.name"))
                 .publicKey(publicKey).privateKey(privateKey).createAdminAccess();

@@ -50,6 +50,9 @@ public class CreatePoolCommandTest {
     public static final String TEST_PROVISIONR_ID = "amazon";
     public static final String TEST_BUSINESS_KEY = "j-123";
 
+    public static final String PATH_TO_PUBLIC_KEY = System.getProperty("user.home") + "/.ssh/id_rsa.pub";
+    public static final String PATH_TO_PRIVATE_KEY = System.getProperty("user.home") + "/.ssh/id_rsa";
+
     @Rule
     public ExpectedException exception = ExpectedException.none();
 
@@ -60,7 +63,8 @@ public class CreatePoolCommandTest {
 
         final List<Provisionr> services = ImmutableList.of(service);
         final List<PoolTemplate> templates = ImmutableList.of();
-        CreatePoolCommand command = new CreatePoolCommand(services, templates) {
+        CreatePoolCommand command = new CreatePoolCommand(services, templates,
+            PATH_TO_PUBLIC_KEY, PATH_TO_PRIVATE_KEY) {
             @Override
             protected Pool createPoolFromArgumentsAndServiceDefaults(Provisionr service) {
                 return pool;
@@ -79,7 +83,7 @@ public class CreatePoolCommandTest {
     @Test(expected = NoSuchElementException.class)
     public void testProvisioningServiceNotFound() throws Exception {
         CreatePoolCommand command = new CreatePoolCommand(Collections.<Provisionr>emptyList(),
-            Collections.<PoolTemplate>emptyList());
+            Collections.<PoolTemplate>emptyList(), PATH_TO_PUBLIC_KEY, PATH_TO_PRIVATE_KEY);
         command.setId("dummy");
 
         CommandSession session = mock(CommandSession.class);
@@ -193,7 +197,8 @@ public class CreatePoolCommandTest {
     private CreatePoolCommand newPoolCommandWithMockedAdminAccess(PoolTemplate template) {
         List<PoolTemplate> templates = template != null ? ImmutableList.<PoolTemplate>of(template) :
             ImmutableList.<PoolTemplate>of();
-        return new CreatePoolCommand(Collections.<Provisionr>emptyList(), templates) {
+        return new CreatePoolCommand(Collections.<Provisionr>emptyList(), templates,
+            PATH_TO_PUBLIC_KEY, PATH_TO_PRIVATE_KEY) {
             @Override
             protected AdminAccess collectCurrentUserCredentialsForAdminAccess() {
                 return mock(AdminAccess.class);
