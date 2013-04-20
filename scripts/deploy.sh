@@ -14,5 +14,5 @@ cd provisionr/
 for w in "secretKey" "accessKey"
 do
         key=$(grep -E -m 1 -o "<.*amazon.*$w>(.*)</.*amazon.*$w>" ~/.m2/settings.xml | sed -e 's,.*<*.>\([^<]*\)</.*>.*,\1,g')
-        sed -i -e "s/$w = .*$/$w = $key/g" ~/provisionr/system/org/apache/provisionr/provisionr-amazon/0.4.0-SNAPSHOT/provisionr-amazon-0.4.0-SNAPSHOT-defaults.cfg
+        sed -i -e "s/$w = .*$/$w = $key/g" ~/provisionr/system/org/apache/provisionr/provisionr-amazon/0.4.0-incubating-SNAPSHOT/provisionr-amazon-0.4.0-incubating-SNAPSHOT-defaults.cfg
 done
