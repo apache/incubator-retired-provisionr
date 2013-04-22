@@ -60,7 +60,9 @@
             <outputDirectory>/</outputDirectory>
             <includes>
                 <include>README.md</include>
-                <include>LICENSE-2.0.txt</include>
+                <include>LICENSE</include>
+                <include>DISCLAIMER</include>
+                <include>NOTICE</include>
             </includes>
         </fileSet>
 
