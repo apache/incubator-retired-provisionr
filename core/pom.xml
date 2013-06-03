@@ -17,7 +17,8 @@
   limitations under the License.
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <groupId>org.apache.provisionr</groupId>
         <artifactId>provisionr-parent</artifactId>
@@ -177,27 +178,6 @@
                                     </file>
                                     <type>cfg</type>
                                     <classifier>fileinstall</classifier>
-                                </artifact>
-                                <artifact>
-                                    <file>
-                                        ${project.build.directory}/classes/org/apache/provisionr/core/templates/cdh3.xml
-                                    </file>
-                                    <type>template</type>
-                                    <classifier>cdh3</classifier>
-                                </artifact>
-                                <artifact>
-                                    <file>
-                                        ${project.build.directory}/classes/org/apache/provisionr/core/templates/cdh4.xml
-                                    </file>
-                                    <type>template</type>
-                                    <classifier>cdh4</classifier>
-                                </artifact>
-                                <artifact>
-                                    <file>
-                                        ${project.build.directory}/classes/org/apache/provisionr/core/templates/jenkins.xml
-                                    </file>
-                                    <type>template</type>
-                                    <classifier>jenkins</classifier>
                                 </artifact>
                             </artifacts>
                         </configuration>

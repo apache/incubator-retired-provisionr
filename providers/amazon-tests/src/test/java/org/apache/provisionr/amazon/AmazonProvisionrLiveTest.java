@@ -18,8 +18,7 @@
 
 package org.apache.provisionr.amazon;
 
-import com.google.common.base.Charsets;
-import com.google.common.io.Resources;
+import com.google.common.base.Stopwatch;
 import java.io.IOException;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -42,7 +41,6 @@ import org.apache.provisionr.api.software.Software;
 import org.apache.provisionr.core.PoolStatus;
 import org.apache.provisionr.core.Ssh;
 import org.apache.provisionr.core.templates.PoolTemplate;
-import org.apache.provisionr.core.templates.xml.XmlTemplate;
 import static org.apache.provisionr.test.KarafTests.installProvisionrFeatures;
 import static org.apache.provisionr.test.KarafTests.installProvisionrTestSupportBundle;
 import static org.apache.provisionr.test.KarafTests.passThroughAllSystemPropertiesWithPrefix;
@@ -56,6 +54,7 @@ import org.ops4j.pax.exam.junit.Configuration;
 import org.ops4j.pax.exam.junit.ExamReactorStrategy;
 import org.ops4j.pax.exam.junit.JUnit4TestRunner;
 import org.ops4j.pax.exam.spi.reactors.AllConfinedStagedReactorFactory;
+import org.osgi.util.tracker.ServiceTracker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -66,8 +65,9 @@ public class AmazonProvisionrLiveTest extends ProvisionrLiveTestSupport {
     public static final Logger LOG = LoggerFactory.getLogger(AmazonProvisionrLiveTest.class);
 
     public static final int TEST_POOL_SIZE = 2;
-
-    public static final String DEFAULT_JENKINS_TEMPLATE_PATH = "/org/apache/provisionr/core/templates/jenkins.xml";
+    public static final String TEST_SPOT_BID_PRICE = "0.04";
+    public static final String TEST_INSTANCE_TYPE = "t1.micro";
+    public static final String TEST_POOL_TEMPLATE = "jenkins";
 
     public AmazonProvisionrLiveTest() {
         super(AmazonProvisionr.ID);
@@ -78,7 +78,7 @@ public class AmazonProvisionrLiveTest extends ProvisionrLiveTestSupport {
         return new Option[]{
             useDefaultKarafAsInProjectWithJunitBundles(),
             passThroughAllSystemPropertiesWithPrefix("test.amazon."),
-            installProvisionrFeatures("provisionr-amazon"),
+            installProvisionrFeatures("provisionr-amazon", "provisionr-examples"),
             installProvisionrTestSupportBundle()
         };
     }
@@ -90,7 +90,7 @@ public class AmazonProvisionrLiveTest extends ProvisionrLiveTestSupport {
 
     @Test
     public void startProvisioningProcessForSpotInstances() throws Exception {
-        startProvisioningProcess("0.04");
+        startProvisioningProcess(TEST_SPOT_BID_PRICE);
     }
 
     private void startProvisioningProcess(String spotBid) throws Exception {
@@ -114,7 +114,7 @@ public class AmazonProvisionrLiveTest extends ProvisionrLiveTestSupport {
             Rule.builder().anySource().port(22).protocol(Protocol.TCP).createRule()
         ).createNetwork();
 
-        final Hardware hardware = Hardware.builder().type("t1.micro").createHardware();
+        final Hardware hardware = Hardware.builder().type(TEST_INSTANCE_TYPE).createHardware();
 
         final AdminAccess adminAccess = AdminAccess.builder().asCurrentUser().createAdminAccess();
 
@@ -124,10 +124,8 @@ public class AmazonProvisionrLiveTest extends ProvisionrLiveTestSupport {
             .file("http://provisionr.incubator.apache.org", destinationPath)
             .createSoftware();
 
-        PoolTemplate jenkins = XmlTemplate.newXmlTemplate(Resources.toString(Resources
-            .getResource(PoolTemplate.class, DEFAULT_JENKINS_TEMPLATE_PATH), Charsets.UTF_8));
-
-        final Pool pool = jenkins.apply(Pool.builder()
+        PoolTemplate template = getPoolTemplateWithId(TEST_POOL_TEMPLATE, 5000);
+        final Pool pool = template.apply(Pool.builder()
             .provider(provider)
             .network(network)
             .adminAccess(adminAccess)
@@ -162,6 +160,31 @@ public class AmazonProvisionrLiveTest extends ProvisionrLiveTestSupport {
         }
     }
 
+    private PoolTemplate getPoolTemplateWithId(String templateId, int timeoutInMilliseconds)
+        throws TimeoutException, InterruptedException {
+        ServiceTracker tracker = new ServiceTracker(bundleContext,
+            PoolTemplate.class.getCanonicalName(), null);
+        tracker.open(true);
+
+        try {
+            Stopwatch stopwatch = new Stopwatch().start();
+            while (stopwatch.elapsedMillis() < timeoutInMilliseconds) {
+                for (Object candidate : tracker.getServices()) {
+                    if (PoolTemplate.class.cast(candidate).getId().equals(templateId)) {
+                        return PoolTemplate.class.cast(candidate);
+                    }
+                }
+                TimeUnit.MILLISECONDS.sleep(100);
+            }
+
+            throw new TimeoutException(String.format("Status check timed out after %d milliseconds",
+                stopwatch.elapsedMillis()));
+
+        } finally {
+            tracker.close();
+        }
+    }
+
     private void assertSshCommand(Machine machine, AdminAccess adminAccess, String bashCommand) throws IOException {
         LOG.info("Checking return code for command '{}' on machine {}", bashCommand, machine.getExternalId());
         SSHClient client = Ssh.newClient(machine, adminAccess);
@@ -184,8 +207,8 @@ public class AmazonProvisionrLiveTest extends ProvisionrLiveTestSupport {
 
     private void waitForPoolStatus(Provisionr provisionr, String businessKey,
                                    String expectedStatus) throws InterruptedException, TimeoutException {
+        String status;
         for (int i = 0; i < 120; i++) {
-            String status;
             try {
                 status = provisionr.getStatus(businessKey);
 

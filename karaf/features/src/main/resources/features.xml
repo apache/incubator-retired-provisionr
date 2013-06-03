@@ -63,6 +63,9 @@
     <repository>
         mvn:org.apache.provisionr/provisionr-rundeck/${project.version}/xml/features
     </repository>
+    <repository>
+        mvn:org.apache.provisionr/provisionr-examples/${project.version}/xml/features
+    </repository>
 
     <feature name="provisionr-commands" version="${project.version}">
         <bundle start="true">mvn:org.apache.provisionr/provisionr-commands/${project.version}</bundle>
@@ -77,6 +80,8 @@
 
         <!--<feature version="${project.version}">provisionr-console</feature>-->
         <!--<feature version="${project.version}">provisionr-cloudstack</feature>-->
+
+        <feature version="${project.version}">provisionr-examples</feature>
 
         <feature version="${project.version}">activiti-karaf-commands</feature>
         <feature version="${project.version}">activiti-karaf-web-explorer</feature>

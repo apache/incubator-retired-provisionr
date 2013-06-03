@@ -18,15 +18,6 @@
 
 package org.apache.provisionr.core.templates.xml;
 
-import org.apache.provisionr.api.network.Network;
-import org.apache.provisionr.api.network.NetworkBuilder;
-import org.apache.provisionr.api.network.Rule;
-import org.apache.provisionr.api.pool.Pool;
-import org.apache.provisionr.api.pool.PoolBuilder;
-import org.apache.provisionr.api.software.Repository;
-import org.apache.provisionr.api.software.Software;
-import org.apache.provisionr.api.software.SoftwareBuilder;
-import org.apache.provisionr.core.templates.PoolTemplate;
 import com.google.common.annotations.VisibleForTesting;
 import static com.google.common.base.Preconditions.checkNotNull;
 import com.google.common.base.Throwables;
@@ -44,6 +35,15 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.apache.provisionr.api.network.Network;
+import org.apache.provisionr.api.network.NetworkBuilder;
+import org.apache.provisionr.api.network.Rule;
+import org.apache.provisionr.api.pool.Pool;
+import org.apache.provisionr.api.pool.PoolBuilder;
+import org.apache.provisionr.api.software.Repository;
+import org.apache.provisionr.api.software.Software;
+import org.apache.provisionr.api.software.SoftwareBuilder;
+import org.apache.provisionr.core.templates.PoolTemplate;
 
 /**
  * Basic representation of a pool template

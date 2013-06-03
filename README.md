@@ -3,7 +3,11 @@ Apache Provisionr
 
 *Simple Service for Managing Pools of 10s or 100s of Virtual Machines*
 
-With Provisionr we want to solve the problem of cloud portability by hiding completely the API and only focusing on building a cluster that matches the same set of assumptions on all clouds, assumptions like: running a specific operating system (e.g. Ubuntu LTS), having the same set of pre-installed packages and binaries, sane dns settings (forward & reverse ip resolution - as needed for [Hadoop](http://hadoop.apache.org/)), ntp settings, networking settings, ssh admin access, vpn access etc.
+With Provisionr we want to solve the problem of cloud portability by hiding completely the API and only
+focusing on building a cluster that matches the same set of assumptions on all clouds, assumptions like:
+running a specific operating system (e.g. Ubuntu LTS), having the same set of pre-installed packages and
+binaries, sane dns settings (forward & reverse ip resolution - as needed for [Hadoop](http://hadoop.apache.org/)),
+ntp settings, networking settings, ssh admin access, vpn access etc.
 
 Features
 --------
@@ -39,7 +43,8 @@ http://apache.org/licenses/LICENSE-2.0.txt
 Supported cloud providers
 -------------------------
 
-We are working on making all this run as expected on [Amazon EC2](http://aws.amazon.com/ec2/) & [CloudStack](http://incubator.apache.org/cloudstack/) 
+We are working on making all this run as expected on [Amazon EC2](http://aws.amazon.com/ec2/)
+(as a reference implementation) & [CloudStack](http://incubator.apache.org/cloudstack/)
 
 How to create a distribution?
 -----------------------------

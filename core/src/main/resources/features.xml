@@ -62,17 +62,5 @@
         <configfile finalname="/etc/org.apache.felix.fileinstall-templates.cfg">
             mvn:org.apache.provisionr/provisionr-core/${project.version}/cfg/fileinstall
         </configfile>
-
-        <configfile finalname="/templates/cdh3.xml">
-            mvn:org.apache.provisionr/provisionr-core/${project.version}/template/cdh3
-        </configfile>
-
-        <configfile finalname="/templates/cdh4.xml">
-            mvn:org.apache.provisionr/provisionr-core/${project.version}/template/cdh4
-        </configfile>
-
-        <configfile finalname="/templates/jenkins.xml">
-            mvn:org.apache.provisionr/provisionr-core/${project.version}/template/jenkins
-        </configfile>
     </feature>
 </features>

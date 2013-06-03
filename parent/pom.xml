@@ -211,6 +211,21 @@
                 <version>${project.version}</version>
             </dependency>
             <dependency>
+                <groupId>org.apache.provisionr</groupId>
+                <artifactId>provisionr-commands</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.provisionr</groupId>
+                <artifactId>provisionr-rundeck</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.provisionr</groupId>
+                <artifactId>provisionr-examples</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.activiti</groupId>
                 <artifactId>activiti-engine</artifactId>
                 <version>${activiti.version}</version>

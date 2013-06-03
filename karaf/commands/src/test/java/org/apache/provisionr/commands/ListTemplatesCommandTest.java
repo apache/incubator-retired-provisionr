@@ -18,8 +18,6 @@
 
 package org.apache.provisionr.commands;
 
-import org.apache.provisionr.core.templates.PoolTemplate;
-import org.apache.provisionr.core.templates.xml.XmlTemplate;
 import com.google.common.base.Charsets;
 import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableList;
@@ -28,6 +26,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import org.apache.felix.service.command.CommandSession;
+import org.apache.provisionr.core.templates.PoolTemplate;
+import org.apache.provisionr.core.templates.xml.XmlTemplate;
 import static org.fest.assertions.api.Assertions.assertThat;
 import org.junit.After;
 import org.junit.Before;
@@ -54,8 +54,8 @@ public class ListTemplatesCommandTest {
     @Test
     public void testListTemplates() throws Exception {
         final ImmutableList<PoolTemplate> templates = ImmutableList.<PoolTemplate>of(
-            XmlTemplate.newXmlTemplate(readDefaultTemplate("jenkins")),
-            XmlTemplate.newXmlTemplate(readDefaultTemplate("cdh3")));
+            XmlTemplate.newXmlTemplate(readDefaultTemplate("test-1")),
+            XmlTemplate.newXmlTemplate(readDefaultTemplate("test-2")));
 
         ListTemplatesCommand command = new ListTemplatesCommand(templates);
 
@@ -64,13 +64,13 @@ public class ListTemplatesCommandTest {
 
         out.flush();
 
-        assertThat(outputStream.toString()).contains("jenkins").contains("cdh3");
+        assertThat(outputStream.toString()).contains("test-1").contains("test-2");
     }
 
     private String readDefaultTemplate(String name) {
         try {
             return Resources.toString(Resources.getResource(PoolTemplate.class,
-                String.format("/org/apache/provisionr/core/templates/%s.xml", name)), Charsets.UTF_8);
+                String.format("/org/apache/provisionr/commands/templates/%s.xml", name)), Charsets.UTF_8);
 
         } catch (IOException e) {
             throw Throwables.propagate(e);

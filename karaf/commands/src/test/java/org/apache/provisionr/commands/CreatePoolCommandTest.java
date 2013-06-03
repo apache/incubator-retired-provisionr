@@ -94,7 +94,7 @@ public class CreatePoolCommandTest {
 
     @Test
     public void testCreatePoolWithTemplate() {
-        final PoolTemplate template = XmlTemplate.newXmlTemplate(readDefaultTemplate("jenkins"));
+        final PoolTemplate template = XmlTemplate.newXmlTemplate(readDefaultTemplate("test-1"));
 
         CreatePoolCommand command = newPoolCommandWithMockedAdminAccess(template);
 
@@ -109,7 +109,7 @@ public class CreatePoolCommandTest {
         Pool pool = command.createPoolFromArgumentsAndServiceDefaults(service);
 
         assertThat(pool.getSoftware().getRepositories()).hasSize(1);
-        assertThat(pool.getSoftware().getPackages()).contains("jenkins").contains("git-core");
+        assertThat(pool.getSoftware().getPackages()).contains("package-1a");
     }
 
     @Test
@@ -189,7 +189,7 @@ public class CreatePoolCommandTest {
     private String readDefaultTemplate(String name) {
         try {
             return Resources.toString(Resources.getResource(PoolTemplate.class,
-                String.format("/org/apache/provisionr/core/templates/%s.xml", name)), Charsets.UTF_8);
+                String.format("/org/apache/provisionr/commands/templates/%s.xml", name)), Charsets.UTF_8);
 
         } catch (IOException e) {
             throw Throwables.propagate(e);

@@ -23,8 +23,6 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Dictionary;
 import org.apache.ibatis.io.Resources;
-import org.apache.provisionr.core.templates.PoolTemplate;
-import org.apache.provisionr.core.templates.PoolTemplateInstaller;
 import org.junit.Test;
 import org.mockito.Matchers;
 import static org.mockito.Matchers.any;
@@ -47,7 +45,7 @@ public class PoolTemplateInstallerTest {
         when(bundleContext.registerService(eq(PoolTemplate.class.getName()), any(),
             Matchers.<Dictionary<String, ?>>any())).thenReturn(registration);
 
-        File file = getPathToCdh3Template();
+        File file = getPathToTestTemplate();
         PoolTemplateInstaller installer = new PoolTemplateInstaller(bundleContext);
 
         installer.install(file);
@@ -59,7 +57,7 @@ public class PoolTemplateInstallerTest {
         verify(registration).unregister();
     }
 
-    private File getPathToCdh3Template() throws URISyntaxException, IOException {
-        return new File(Resources.getResourceURL("org/apache/provisionr/core/templates/cdh3.xml").toURI());
+    private File getPathToTestTemplate() throws URISyntaxException, IOException {
+        return new File(Resources.getResourceURL("templates/test.xml").toURI());
     }
 }

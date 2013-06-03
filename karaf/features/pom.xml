@@ -55,13 +55,16 @@
         <dependency>
             <groupId>org.apache.provisionr</groupId>
             <artifactId>provisionr-rundeck</artifactId>
-            <version>${project.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.provisionr</groupId>
             <artifactId>provisionr-commands</artifactId>
-            <version>${project.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.provisionr</groupId>
+            <artifactId>provisionr-examples</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>

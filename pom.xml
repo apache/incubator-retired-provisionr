@@ -35,6 +35,7 @@
         <module>parent</module>
         <module>api</module>
         <module>core</module>
+        <module>examples</module>
         <module>console</module>
         <module>test-support</module>
         <module>providers/amazon</module>
