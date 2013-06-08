@@ -39,7 +39,8 @@ public class DeleteKeyPairLiveTest extends CloudStackActivityLiveTest<DeleteKeyP
     public void setUp() throws Exception {
         super.setUp();
         logKeyPairs();
-        context.getApi().getSSHKeyPairClient().registerSSHKeyPair(KEYPAIR_NAME, getResourceAsString("keys/test.pub"));
+        context.getApi().getSSHKeyPairClient().registerSSHKeyPair(KEYPAIR_NAME,
+            getResourceAsString("/org/apache/provisionr/test/id_rsa_test.pub"));
     }
 
     @Override
@@ -54,8 +55,8 @@ public class DeleteKeyPairLiveTest extends CloudStackActivityLiveTest<DeleteKeyP
     public void testDeleteKeyPair() throws Exception {
         final AdminAccess adminAccess = AdminAccess.builder()
             .username("admin")
-            .publicKey(getResourceAsString("keys/test.pub"))
-            .privateKey(getResourceAsString("keys/test"))
+            .publicKey(getResourceAsString("/org/apache/provisionr/test/id_rsa_test.pub"))
+            .privateKey(getResourceAsString("/org/apache/provisionr/test/id_rsa_test"))
             .createAdminAccess();
 
         DelegateExecution execution = mock(DelegateExecution.class);

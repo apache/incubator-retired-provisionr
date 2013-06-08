@@ -424,5 +424,48 @@
                 </plugins>
             </build>
         </profile>
+        <profile>
+            <id>with-rat</id>
+            <activation>
+                <property>
+                    <name>!skipRat</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.rat</groupId>
+                        <artifactId>apache-rat-plugin</artifactId>
+                        <version>0.9</version>
+                        <executions>
+                            <execution>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>check</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <excludes>
+                                <exlude>**/*.md</exlude>
+                                <exclude>NOTICE</exclude>
+                                <exclude>.git/**</exclude>
+                                <exclude>.gitignore</exclude>
+                                <exclude>.idea/**</exclude>
+                                <exclude>**/*.iml</exclude>
+                                <exclude>**/*.project</exclude>
+                                <exclude>**/*.classpath</exclude>
+                                <exclude>**/id_rsa_test</exclude>
+                                <exclude>**/id_rsa_test.pub</exclude>
+                                <exclude>**/*.bpmn20.xml</exclude>
+                                <exclude>**/*.activiti</exclude>
+                                <exclude>**/*.csv</exclude>
+                                <exclude>**/target/**</exclude>
+                            </excludes>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
     </profiles>
 </project>

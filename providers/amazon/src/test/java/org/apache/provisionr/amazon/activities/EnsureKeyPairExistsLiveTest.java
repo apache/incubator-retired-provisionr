@@ -36,7 +36,7 @@ public class EnsureKeyPairExistsLiveTest extends AmazonActivityLiveTest<EnsureKe
     /**
      * Computed in an Amazon specific way
      */
-    public static final String TEST_KEY_FINGERPRINT = "2f:e9:a0:bc:17:71:3a:7e:d7:c0:16:99:0d:62:8e:be";
+    public static final String TEST_KEY_FINGERPRINT = "0e:2f:16:f4:15:a3:80:e8:c5:1a:8b:85:e4:fe:69:fa";
 
     private final String KEYPAIR_NAME = KeyPairs.formatNameFromBusinessKey(BUSINESS_KEY);
 
@@ -50,8 +50,8 @@ public class EnsureKeyPairExistsLiveTest extends AmazonActivityLiveTest<EnsureKe
     public void testEnsureKeyPairExists() throws Exception {
         final AdminAccess adminAccess = AdminAccess.builder()
             .username("admin")
-            .publicKey(getResourceAsString("keys/test.pub"))
-            .privateKey(getResourceAsString("keys/test"))
+            .publicKey(getResourceAsString("/org/apache/provisionr/test/id_rsa_test.pub"))
+            .privateKey(getResourceAsString("/org/apache/provisionr/test/id_rsa_test"))
             .createAdminAccess();
 
         DelegateExecution execution = mock(DelegateExecution.class);

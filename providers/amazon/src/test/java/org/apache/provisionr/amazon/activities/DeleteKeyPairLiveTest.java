@@ -44,7 +44,7 @@ public class DeleteKeyPairLiveTest extends AmazonActivityLiveTest<DeleteKeyPair>
         super.setUp();
 
         client.importKeyPair(new ImportKeyPairRequest().withKeyName(KEYPAIR_NAME)
-            .withPublicKeyMaterial(getResourceAsString("keys/test.pub")));
+            .withPublicKeyMaterial(getResourceAsString("/org/apache/provisionr/test/id_rsa_test.pub")));
     }
 
     @Override
@@ -57,8 +57,8 @@ public class DeleteKeyPairLiveTest extends AmazonActivityLiveTest<DeleteKeyPair>
     public void testDeleteKeyPair() throws Exception {
         final AdminAccess adminAccess = AdminAccess.builder()
             .username("admin")
-            .publicKey(getResourceAsString("keys/test.pub"))
-            .privateKey(getResourceAsString("keys/test"))
+            .publicKey(getResourceAsString("/org/apache/provisionr/test/id_rsa_test.pub"))
+            .privateKey(getResourceAsString("/org/apache/provisionr/test/id_rsa_test"))
             .createAdminAccess();
 
         DelegateExecution execution = mock(DelegateExecution.class);

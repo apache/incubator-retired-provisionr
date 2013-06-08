@@ -34,7 +34,7 @@ import static org.mockito.Mockito.when;
 
 public class EnsureKeyPairExistsLiveTest extends CloudStackActivityLiveTest<EnsureKeyPairExists> {
 
-    public static final String TEST_KEY_FINGERPRINT = "15:0b:a4:43:dd:58:19:9e:84:ca:db:31:a8:6b:b6:c3";
+    public static final String TEST_KEY_FINGERPRINT = "0e:2f:16:f4:15:a3:80:e8:c5:1a:8b:85:e4:fe:69:fa";
     private final String KEYPAIR_NAME = KeyPairs.formatNameFromBusinessKey(BUSINESS_KEY);
 
     @Override
@@ -56,8 +56,8 @@ public class EnsureKeyPairExistsLiveTest extends CloudStackActivityLiveTest<Ensu
     public void testEnsureKeyPairExists() throws Exception {
         final AdminAccess adminAccess = AdminAccess.builder()
             .username("admin")
-            .publicKey(getResourceAsString("keys/test.pub"))
-            .privateKey(getResourceAsString("keys/test"))
+            .publicKey(getResourceAsString("/org/apache/provisionr/test/id_rsa_test.pub"))
+            .privateKey(getResourceAsString("/org/apache/provisionr/test/id_rsa_test"))
             .createAdminAccess();
 
         DelegateExecution execution = mock(DelegateExecution.class);

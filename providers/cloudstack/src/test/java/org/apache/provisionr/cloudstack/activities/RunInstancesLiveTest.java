@@ -58,8 +58,8 @@ public class RunInstancesLiveTest extends CloudStackActivityLiveTest<RunInstance
 
         final AdminAccess adminAccess = AdminAccess.builder()
             .username("admin")
-            .publicKey(getResourceAsString("keys/test.pub"))
-            .privateKey(getResourceAsString("keys/test"))
+            .publicKey(getResourceAsString("/org/apache/provisionr/test/id_rsa_test.pub"))
+            .privateKey(getResourceAsString("/org/apache/provisionr/test/id_rsa_test"))
             .createAdminAccess();
 
         final Network network = Network.builder().addRules(
