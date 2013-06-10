@@ -17,8 +17,10 @@
   limitations under the License.
   -->
 
-<assembly>
-    <id>provisionr-assembly</id>
+<assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.0 http://maven.apache.org/xsd/assembly-1.1.0.xsd">
+    <id>provisionr-assembly-bin</id>
     <formats>
         <format>tar.gz</format>
     </formats>
@@ -26,7 +28,7 @@
     <fileSets>
         <!-- Strip the Karaf distribution -->
         <fileSet>
-            <directory>target/dependencies/unix/apache-karaf-${karaf.version}</directory>
+            <directory>${project.basedir}/target/dependencies/unix/apache-karaf-${karaf.version}</directory>
             <outputDirectory>/</outputDirectory>
             <excludes>
                 <exclude>**/demos/**</exclude>
@@ -48,7 +50,7 @@
 
         <!-- Copy over bin/* scripts separately to get the correct file mode -->
         <fileSet>
-            <directory>target/dependencies/unix/apache-karaf-${karaf.version}</directory>
+            <directory>${project.basedir}/target/dependencies/unix/apache-karaf-${karaf.version}</directory>
             <outputDirectory>/</outputDirectory>
             <includes>
                 <include>bin/*</include>
@@ -58,7 +60,7 @@
 
         <!-- Copy over the README and the LICENSE -->
         <fileSet>
-            <directory>../../</directory>
+            <directory>${project.basedir}/../../</directory>
             <outputDirectory>/</outputDirectory>
             <includes>
                 <include>README.md</include>
@@ -70,7 +72,7 @@
 
         <!-- Copy over resources -->
         <fileSet>
-            <directory>target/classes/etc</directory>
+            <directory>${project.basedir}/target/classes/etc</directory>
             <outputDirectory>/etc/</outputDirectory>
             <includes>
                 <include>*.*</include>
@@ -81,7 +83,7 @@
 
         <!-- Copy over templates -->
         <fileSet>
-            <directory>target/classes/templates</directory>
+            <directory>${project.basedir}/target/classes/templates</directory>
             <outputDirectory>/templates/</outputDirectory>
             <includes>
                 <include>*.*</include>
@@ -94,13 +96,13 @@
         <!-- Add features to system repository -->
         <fileSet>
             <outputDirectory>system</outputDirectory>
-            <directory>target/features-repo</directory>
+            <directory>${project.basedir}/target/features-repo</directory>
         </fileSet>
     </fileSets>
 
     <files>
         <file>
-            <source>${basedir}/target/dependencies/unix/apache-karaf-${karaf.version}/bin/karaf</source>
+            <source>${project.basedir}/target/dependencies/unix/apache-karaf-${karaf.version}/bin/karaf</source>
             <outputDirectory>/bin/</outputDirectory>
             <destName>provisionr</destName>
             <fileMode>0755</fileMode>

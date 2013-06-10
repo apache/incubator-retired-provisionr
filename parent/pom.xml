@@ -107,6 +107,15 @@
         <url>http://www.apache.org/</url>
     </organization>
 
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+            <comments>A business-friendly OSS license</comments>
+        </license>
+    </licenses>
+
     <scm>
         <connection>scm:git:https://git-wip-us.apache.org/repos/asf/incubator-provisionr.git</connection>
         <developerConnection>
@@ -115,6 +124,16 @@
         <url>https://git-wip-us.apache.org/repos/asf?p=incubator-provisionr.git</url>
         <tag>HEAD</tag>
     </scm>
+
+    <mailingLists>
+        <mailingList>
+            <name>Apache Provisionr Development Mailing List</name>
+            <post>dev@provisionr.incubator.apache.org</post>
+            <subscribe>dev-subscribe@provisionr.incubator.apache.org</subscribe>
+            <unsubscribe>dev-unsubscribe@provisionr.incubator.apache.org</unsubscribe>
+            <archive>http://mail-archives.apache.org/mod_mbox/incubator-provisionr-dev/</archive>
+        </mailingList>
+    </mailingLists>
 
     <issueManagement>
         <system>jira</system>
@@ -322,6 +341,14 @@
 
     <repositories>
         <repository>
+            <id>apache.snapshots</id>
+            <name>Apache Snapshot Repository</name>
+            <url>http://repository.apache.org/snapshots</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </repository>
+        <repository>
             <id>central</id>
             <url>http://repo1.maven.org/maven2/</url>
         </repository>
@@ -336,6 +363,22 @@
         </repository>
     </repositories>
 
+    <pluginRepositories>
+        <pluginRepository>
+            <id>apache-snapshots</id>
+            <url>https://repository.apache.org/content/repositories/snapshots</url>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <distributionManagement>
+        <repository>
+            <id>apache.staging.https</id>
+            <name>Nexus Staging Repo</name>
+            <url>https://repository.apache.org/service/local/staging/deploy/maven2/
+            </url>
+        </repository>
+    </distributionManagement>
+
     <build>
         <plugins>
             <plugin>
@@ -347,6 +390,19 @@
                     <target>1.6</target>
                     <encoding>UTF-8</encoding>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.2.1</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <!-- use mvn versions:display-dependency-updates versions:display-plugin-updates -->
             <plugin>
@@ -393,15 +449,64 @@
 
     <profiles>
         <profile>
+            <!-- Used only when cutting a full release.  Configures the deploy plugin to mark
+                each artifact as a release (especially important for the archetype). Signs each
+                file deployed -->
+            <id>with-signing</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>1.4</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+            <properties>
+                <update-release-info>true</update-release-info>
+            </properties>
+        </profile>
+        <profile>
+            <!--  Only bind Javadoc JARs when the javadoc profile is active, since it is slow. -->
+            <id>with-javadoc</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>2.9</version>
+                        <executions>
+                            <execution>
+                                <id>attach-javadocs</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
             <id>with-live-tests</id>
             <build>
                 <plugins>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-failsafe-plugin</artifactId>
-                        <version>2.13</version>
+                        <version>2.15</version>
                         <inherited>true</inherited>
                         <configuration>
+                            <forkedProcessTimeoutInSeconds>3600</forkedProcessTimeoutInSeconds>
                             <includes>
                                 <include>**/*LiveTest.java</include>
                             </includes>
@@ -450,11 +555,13 @@
                                 <exlude>**/*.md</exlude>
                                 <exclude>NOTICE</exclude>
                                 <exclude>.git/**</exclude>
+                                <exclude>.repository/**</exclude>
                                 <exclude>.gitignore</exclude>
                                 <exclude>.idea/**</exclude>
                                 <exclude>**/*.iml</exclude>
                                 <exclude>**/*.project</exclude>
                                 <exclude>**/*.classpath</exclude>
+                                <exclude>**/*.prefs</exclude>
                                 <exclude>**/id_rsa_test</exclude>
                                 <exclude>**/id_rsa_test.pub</exclude>
                                 <exclude>**/*.bpmn20.xml</exclude>

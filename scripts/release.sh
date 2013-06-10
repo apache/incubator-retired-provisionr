@@ -24,7 +24,14 @@ mvn -Pwith-assembly release:clean release:prepare -DreleaseVersion=$RELEASE_VERS
     -Dtag=provisionr-$RELEASE_VERSION -DdevelopmentVersion=$DEVELOPMENT_VERSION -DpushChanges=false
 
 mvn -Pwith-assembly clean release:perform -DconnectionUrl=scm:git:file://`pwd`/.git \
-    -Dtag=provisionr-$RELEASE_VERSION -Dgoals="package -DskipTests -DskipKarafTests" 
+    -Dtag=provisionr-$RELEASE_VERSION -Dgoals="package deploy -DskipTests"
 
-echo "Done. Please upload the artifact and git push && git push --tags"
+git checkout provisionr-$RELEASE_VERSION
+
+mvn -Pwith-assembly -DskipTests -DskipKarafTests clean package
+
+git checkout master
+
+echo "Done. Please upload the artifacts from karaf/assembly/target and call a vote"
+echo "If the vote is succesfull: git push && git push --tags"
 

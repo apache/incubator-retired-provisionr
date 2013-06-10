@@ -28,7 +28,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <name>Apache Provisionr :: Custom Karaf Distribution</name>
-    <description>Install all the features as a custom Karaf distribution</description>
+    <description>Prepare a custom Karaf distribution and a source release</description>
     <artifactId>provisionr-assembly</artifactId>
 
     <dependencies>
@@ -149,16 +149,31 @@
                 <version>2.4</version>
                 <executions>
                     <execution>
-                        <id>unix-bin</id>
+                        <id>bin</id>
                         <phase>package</phase>
                         <goals>
                             <goal>single</goal>
                         </goals>
                         <configuration>
                             <descriptors>
-                                <descriptor>src/main/assembly/unix.xml</descriptor>
+                                <descriptor>src/main/assembly/bin.xml</descriptor>
                             </descriptors>
-                            <finalName>${project.groupId}-${project.version}</finalName>
+                            <finalName>provisionr-${project.version}</finalName>
+                            <tarLongFileMode>gnu</tarLongFileMode>
+                            <appendAssemblyId>false</appendAssemblyId>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>src</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <descriptors>
+                                <descriptor>src/main/assembly/src.xml</descriptor>
+                            </descriptors>
+                            <finalName>provisionr-${project.version}-src</finalName>
                             <tarLongFileMode>gnu</tarLongFileMode>
                             <appendAssemblyId>false</appendAssemblyId>
                         </configuration>
