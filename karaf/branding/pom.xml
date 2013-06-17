@@ -48,7 +48,9 @@
                 <configuration>
                     <outputDirectory>${basedir}/target/classes</outputDirectory>
                     <instructions>
-                        <Export-Package>org.apache.karaf.branding</Export-Package>
+                        <Import-Package>*</Import-Package>
+                        <Private-Package>!*</Private-Package>
+                        <Export-Package>org.apache.karaf.branding;-nodefaultversion:=false</Export-Package>
                     </instructions>
                 </configuration>
             </plugin>

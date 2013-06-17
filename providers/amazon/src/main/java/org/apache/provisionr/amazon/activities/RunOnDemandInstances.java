@@ -18,29 +18,24 @@
 
 package org.apache.provisionr.amazon.activities;
 
-import java.io.IOException;
-import java.util.List;
-
-import org.activiti.engine.delegate.DelegateExecution;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.amazonaws.services.ec2.AmazonEC2;
 import com.amazonaws.services.ec2.model.Instance;
 import com.amazonaws.services.ec2.model.RunInstancesRequest;
 import com.amazonaws.services.ec2.model.RunInstancesResult;
+import com.google.common.base.Function;
+import com.google.common.collect.Lists;
+import java.io.IOException;
+import java.util.List;
+import org.activiti.engine.delegate.DelegateExecution;
 import org.apache.provisionr.amazon.ProcessVariables;
 import org.apache.provisionr.amazon.core.ProviderClientCache;
 import org.apache.provisionr.api.pool.Pool;
-import com.google.common.base.Function;
-import com.google.common.collect.Lists;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class RunOnDemandInstances extends RunInstances {
 
     private static final Logger LOG = LoggerFactory.getLogger(RunOnDemandInstances.class);
-
-    public static final String DEFAULT_ARCH = "amd64";
-    public static final String DEFAULT_TYPE = "instance-store";
 
     public RunOnDemandInstances(ProviderClientCache cache) {
         super(cache);

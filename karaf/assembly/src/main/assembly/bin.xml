@@ -32,11 +32,9 @@
             <outputDirectory>/</outputDirectory>
             <excludes>
                 <exclude>**/demos/**</exclude>
-                <exclude>lib/karaf-version.jar</exclude>
                 <exclude>bin/**</exclude>
                 <exclude>etc/org.apache.karaf.features.cfg</exclude>
                 <exclude>etc/custom.properties</exclude>
-                <exclude>etc/startup.properties</exclude>
                 <!--<exclude>etc/jre.properties*</exclude>-->
                 <exclude>etc/org.apache.karaf.features.repos.cfg</exclude>
                 <exclude>readme.txt</exclude>

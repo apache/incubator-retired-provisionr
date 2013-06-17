@@ -23,16 +23,12 @@
 
     <feature name="activiti-karaf" version="${activiti.version}">
         <feature>transaction</feature>
-        <bundle dependency="true">
-            mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.antlr/${antlr.osgi.version}
-        </bundle>
-        <bundle dependency="true">mvn:org.eclipse.jetty.orbit/org.objectweb.asm/${asm.version}</bundle>
         <bundle dependency="true">mvn:javax.mail/mail/${java.mail.version}</bundle>
 
         <bundle dependency="true">mvn:com.h2database/h2/${h2.version}</bundle>
         <bundle dependency="true">mvn:org.mybatis/mybatis/${mybatis.version}</bundle>
 
-        <bundle dependency="true">mvn:org.codehaus.groovy/groovy/${groovy.version}</bundle>
+        <bundle dependency="true">mvn:org.codehaus.groovy/groovy-all/${groovy.version}</bundle>
 
         <bundle start="true">mvn:org.activiti/activiti-engine/${activiti.version}</bundle>
         <bundle start="true">mvn:org.activiti/activiti-osgi/${activiti.version}</bundle>

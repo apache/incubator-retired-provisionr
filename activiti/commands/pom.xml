@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <!--
         Copyright 2012 Cisco Systems
         
@@ -127,7 +128,7 @@
         </dependency>
         <dependency>
             <groupId>org.codehaus.groovy</groupId>
-            <artifactId>groovy</artifactId>
+            <artifactId>groovy-all</artifactId>
             <version>${groovy.version}</version>
             <scope>test</scope>
         </dependency>
@@ -166,9 +167,11 @@
                             org.activiti.karaf.commands.util
                         </Export-Package>
                         <Import-Package>
+                            org.apache.felix.service.command,
                             org.apache.felix.gogo.commands,
-                            org.apache.karaf.shell.console,
-                            org.apache.karaf.shell.console.completer,
+                            org.apache.karaf.shell.console;version="[2.2,4)",
+                            org.apache.karaf.shell.console.commands;version="[2.2,4)",
+                            org.apache.karaf.shell.console.completer;version="[2.2,4)",
                             *
                         </Import-Package>
                     </instructions>

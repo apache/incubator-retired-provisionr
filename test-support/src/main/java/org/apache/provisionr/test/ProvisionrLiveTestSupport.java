@@ -18,8 +18,6 @@
 
 package org.apache.provisionr.test;
 
-import org.apache.provisionr.api.provider.Provider;
-import org.apache.provisionr.api.provider.ProviderBuilder;
 import com.google.common.base.Charsets;
 import com.google.common.base.Optional;
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -32,6 +30,8 @@ import javax.inject.Inject;
 import org.activiti.engine.ProcessEngine;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.runtime.ProcessInstance;
+import org.apache.provisionr.api.provider.Provider;
+import org.apache.provisionr.api.provider.ProviderBuilder;
 import org.osgi.framework.BundleContext;
 import org.osgi.util.tracker.ServiceTracker;
 import org.slf4j.Logger;
@@ -96,7 +96,7 @@ public class ProvisionrLiveTestSupport {
     }
 
     public String getResourceAsString(String resource) throws IOException {
-        return Resources.toString(Resources.getResource(resource), Charsets.UTF_8);
+        return Resources.toString(Resources.getResource(ProvisionrLiveTestSupport.class, resource), Charsets.UTF_8);
     }
 
     /**
@@ -108,7 +108,7 @@ public class ProvisionrLiveTestSupport {
     public void waitForProcessDeployment(String processKey) throws InterruptedException, TimeoutException {
         ProcessEngine engine = getOsgiService(ProcessEngine.class, 5000);
         int iteration = 0;
-        while (iteration < 5) {
+        while (iteration < 10) {
             ProcessDefinition definition = engine.getRepositoryService()
                 .createProcessDefinitionQuery()
                 .processDefinitionKey(processKey).singleResult();
@@ -116,7 +116,7 @@ public class ProvisionrLiveTestSupport {
                 break;
             }
             iteration++;
-            TimeUnit.MILLISECONDS.sleep(500);
+            TimeUnit.SECONDS.sleep(1);
         }
         if (iteration == 5) {
             throw new TimeoutException("No process found with key: " + processKey);

@@ -108,9 +108,11 @@
                             org.apache.provisionr.commands
                         </Export-Package>
                         <Import-Package>
+                            org.apache.felix.service.command,
                             org.apache.felix.gogo.commands,
-                            org.apache.karaf.shell.console,
-                            org.apache.karaf.shell.console.completer,
+                            org.apache.karaf.shell.console;version="[2.2,4)",
+                            org.apache.karaf.shell.console.commands;version="[2.2,4)",
+                            org.apache.karaf.shell.console.completer;version="[2.2,4)",
                             *
                         </Import-Package>
                     </instructions>

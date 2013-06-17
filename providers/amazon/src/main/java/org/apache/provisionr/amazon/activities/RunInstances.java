@@ -97,8 +97,10 @@ public abstract class RunInstances extends AmazonActivity {
         if (spot) {
             Calendar validUntil = Calendar.getInstance();
             validUntil.add(Calendar.MINUTE, 10);
+
             final String spotPrice = checkNotNull(pool.getProvider().getOption(ProviderOptions.SPOT_BID),
                 "The bid for spot instances was not specified");
+
             LaunchSpecification ls = new LaunchSpecification()
                 .withInstanceType(instanceType)
                 .withKeyName(keyPairName)
@@ -106,6 +108,7 @@ public abstract class RunInstances extends AmazonActivity {
                 .withBlockDeviceMappings(blockDeviceMappings)
                 .withSecurityGroups(Lists.newArrayList(securityGroupName))
                 .withUserData(Base64.encodeBytes(userData.getBytes(Charsets.UTF_8)));
+
             return new RequestSpotInstancesRequest()
                 .withSpotPrice(spotPrice)
                 .withLaunchSpecification(ls)
@@ -113,6 +116,7 @@ public abstract class RunInstances extends AmazonActivity {
                 .withInstanceCount(pool.getExpectedSize())
                 .withType(SpotInstanceType.OneTime)
                 .withValidUntil(validUntil.getTime());
+
         } else {
             return new RunInstancesRequest()
                 .withClientToken(businessKey)

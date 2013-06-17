@@ -35,6 +35,7 @@ public abstract class CreatePoolLiveTest<T extends AmazonActivity> extends Amazo
 
     protected DelegateExecution execution;
     protected Pool pool;
+
     protected Hardware hardware;
     protected Software software;
 
@@ -57,8 +58,10 @@ public abstract class CreatePoolLiveTest<T extends AmazonActivity> extends Amazo
         hardware = mock(Hardware.class);
         when(hardware.getType()).thenReturn("t1.micro");
         when(hardware.getBlockDevices()).thenReturn(new ArrayList<BlockDevice>());
+        when(pool.getHardware()).thenReturn(hardware);
 
         software = mock(Software.class);
+        when(pool.getSoftware()).thenReturn(software);
 
         when(pool.getProvider()).thenReturn(provider);
         when(pool.getAdminAccess()).thenReturn(adminAccess);
@@ -66,8 +69,6 @@ public abstract class CreatePoolLiveTest<T extends AmazonActivity> extends Amazo
 
         when(pool.getMinSize()).thenReturn(1);
         when(pool.getExpectedSize()).thenReturn(1);
-
-        when(pool.getHardware()).thenReturn(hardware);
 
         when(execution.getProcessBusinessKey()).thenReturn(BUSINESS_KEY);
         when(execution.getVariable(CoreProcessVariables.POOL)).thenReturn(pool);

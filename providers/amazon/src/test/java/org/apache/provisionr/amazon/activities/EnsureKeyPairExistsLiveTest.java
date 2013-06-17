@@ -36,7 +36,7 @@ public class EnsureKeyPairExistsLiveTest extends AmazonActivityLiveTest<EnsureKe
     /**
      * Computed in an Amazon specific way
      */
-    public static final String TEST_KEY_FINGERPRINT = "0e:2f:16:f4:15:a3:80:e8:c5:1a:8b:85:e4:fe:69:fa";
+    public static final String TEST_KEY_FINGERPRINT = "6f:05:94:d8:97:a0:ce:4a:31:d1:3c:1b:f6:ed:31:6b";
 
     private final String KEYPAIR_NAME = KeyPairs.formatNameFromBusinessKey(BUSINESS_KEY);
 
