@@ -28,7 +28,7 @@
 
     <groupId>org.apache.provisionr</groupId>
     <artifactId>provisionr-parent</artifactId>
-    <version>0.4.0-incubating</version>
+    <version>0.5.0-incubating-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Apache Provisionr :: Parent</name>
@@ -121,7 +121,7 @@
             scm:git:https://git-wip-us.apache.org/repos/asf/incubator-provisionr.git
         </developerConnection>
         <url>https://git-wip-us.apache.org/repos/asf?p=incubator-provisionr.git</url>
-        <tag>provisionr-0.4.0-incubating</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <mailingLists>
