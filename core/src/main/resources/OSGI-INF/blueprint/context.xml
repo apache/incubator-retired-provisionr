@@ -23,6 +23,7 @@
                               placeholder-prefix="$(" placeholder-suffix=")" update-strategy="reload">
         <cfg:default-properties>
             <cfg:property name="activiti.db.url" value="jdbc:h2:mem:provisionr;MVCC=TRUE;DB_CLOSE_DELAY=-1"/>
+            <cfg:property name="activiti.db.driver" value="org.h2.Driver"/>
             <cfg:property name="activiti.db.user" value="sa"/>
             <cfg:property name="activiti.db.password" value=""/>
             <cfg:property name="activiti.db.schemaUpdate" value="true"/>
@@ -39,10 +40,11 @@
         </cfg:default-properties>
     </cfg:property-placeholder>
 
-    <bean id="dataSource" class="org.h2.jdbcx.JdbcDataSource" scope="singleton">
-        <property name="URL" value="$(activiti.db.url)"/>
-        <property name="user" value="$(activiti.db.user)"/>
-        <property name="password" value="$(activiti.db.password)"/>
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+        <property name="driverClass" value="${activiti.db.driver}"/>
+        <property name="url" value="${activiti.db.url}"/>
+        <property name="username" value="${activiti.db.user}"/>
+        <property name="password" value="${activiti.db.password}"/>
     </bean>
 
     <bean id="jobExecutor" class="org.activiti.engine.impl.jobexecutor.DefaultJobExecutor">

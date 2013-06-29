@@ -144,7 +144,7 @@
         <osgi.framework.version>4.3.0</osgi.framework.version>
         <activiti.version>5.10</activiti.version>
         <h2.version>1.3.168</h2.version>
-        <spring.version>3.0.7.RELEASE</spring.version>
+        <spring.version>3.1.4.RELEASE</spring.version>
         <spring.osgi.version>1.2.1</spring.osgi.version>
         <vaadin.version>6.6.2</vaadin.version>
         <guava.version>13.0</guava.version>
@@ -251,6 +251,21 @@
                 <groupId>org.activiti</groupId>
                 <artifactId>activiti-osgi</artifactId>
                 <version>${activiti.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-jdbc</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.provisionr</groupId>
+                <artifactId>activiti-database</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+                <version>9.1-901.jdbc4</version>
             </dependency>
             <dependency>
                 <groupId>com.google.guava</groupId>

@@ -27,7 +27,8 @@
 
         <bundle dependency="true">mvn:com.h2database/h2/${h2.version}</bundle>
         <bundle dependency="true">mvn:org.mybatis/mybatis/${mybatis.version}</bundle>
-
+        <bundle dependency="true">mvn:org.springframework/spring-jdbc/${spring.version}</bundle>
+        <bundle dependency="true">mvn:org.apache.provisionr/activiti-database/${project.version}</bundle>
         <bundle dependency="true">mvn:org.codehaus.groovy/groovy-all/${groovy.version}</bundle>
 
         <bundle start="true">mvn:org.activiti/activiti-engine/${activiti.version}</bundle>
