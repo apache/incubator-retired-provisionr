@@ -37,9 +37,8 @@ public class Commands {
 
     public void printNameValues(PrintWriter out, Map<String, String> nvMap) {
         String fmt = "  %-16.16s %-20.60s\n";
-        for (String key : nvMap.keySet()) {
-            String value = nvMap.get(key);
-            out.printf(fmt, key + ":", value);
+        for (Map.Entry<String, String> entry : nvMap.entrySet()) {
+            out.printf(fmt, entry.getKey() + ":", entry.getValue());
         }
     }
 

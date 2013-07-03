@@ -18,10 +18,10 @@
 
 package org.apache.provisionr.cloudstack.commands;
 
-import org.apache.provisionr.cloudstack.DefaultProviderConfig;
 import java.io.PrintStream;
 import org.apache.felix.gogo.commands.Command;
 import org.apache.felix.gogo.commands.Option;
+import org.apache.provisionr.cloudstack.DefaultProviderConfig;
 import org.jclouds.cloudstack.CloudStackClient;
 import org.jclouds.cloudstack.domain.DiskOffering;
 import org.jclouds.cloudstack.domain.NetworkOffering;
@@ -47,9 +47,10 @@ public class OfferingsCommand extends CommandSupport {
     }
 
     @Override
-    public Object doExecuteWithContext(CloudStackClient client, PrintStream out) throws Exception {
+    public Object doExecuteWithContext(CloudStackClient client, PrintStream out) {
         if (isDiskOfferingListed() || isServiceOfferingListed() || isNetworkOfferingListed()) {
             out.printf("CloudStack Offerings for provider %s\n", getProvider().getId());
+
             listServiceOfferingsIfSpecified(client, out);
             listNetworkOfferingsIfSpecified(client, out);
             listDiskOfferingsIfSpecified(client, out);

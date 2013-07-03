@@ -234,15 +234,17 @@ public class InfoActivitiCommand extends ActivitiCommand {
         out().println("======== Process Instance Details");
         printProcessInstanceInfo(hpi);
 
-        List<HistoricActivityInstance> actInstList = hs.createHistoricActivityInstanceQuery()
-            .processInstanceId(hpi.getId()).orderByHistoricActivityInstanceStartTime().asc().list();
-        if (actInstList != null && actInstList.size() > 0) {
-            out().println("======== Activity Execution Details");
-            for (HistoricActivityInstance actInst : actInstList) {
-                printActivityInstanceInfo(actInst);
+        if (hpi != null) {
+            List<HistoricActivityInstance> actInstList = hs.createHistoricActivityInstanceQuery()
+                .processInstanceId(hpi.getId()).orderByHistoricActivityInstanceStartTime().asc().list();
+            if (actInstList != null && actInstList.size() > 0) {
+                out().println("======== Activity Execution Details");
+                for (HistoricActivityInstance actInst : actInstList) {
+                    printActivityInstanceInfo(actInst);
+                }
+            } else {
+                LOG.info("No Activity execution details");
             }
-        } else {
-            LOG.info("No Activity execution details");
         }
     }
 

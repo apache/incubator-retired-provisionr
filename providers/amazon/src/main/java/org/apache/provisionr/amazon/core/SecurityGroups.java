@@ -18,7 +18,7 @@
 
 package org.apache.provisionr.amazon.core;
 
-public class SecurityGroups {
+public final class SecurityGroups {
 
     private SecurityGroups() {
         /* singleton */

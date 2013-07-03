@@ -18,13 +18,13 @@
 
 package org.apache.provisionr.commands;
 
-import org.apache.provisionr.core.templates.PoolTemplate;
 import com.google.common.annotations.VisibleForTesting;
 import static com.google.common.base.Preconditions.checkNotNull;
 import java.io.PrintStream;
 import java.util.List;
 import org.apache.felix.gogo.commands.Command;
 import org.apache.karaf.shell.console.OsgiCommandSupport;
+import org.apache.provisionr.core.templates.PoolTemplate;
 
 /**
  * List pre-configured templates that can be used to create clusters on different providers
@@ -41,9 +41,9 @@ public class ListTemplatesCommand extends OsgiCommandSupport {
     }
 
     @Override
-    protected Object doExecute() throws Exception {
+    protected Object doExecute() {
         for (PoolTemplate template : templates) {
-            out.printf("- %s\n\t%s\n", template.getId(), template.getDescription());
+            out.printf("- %s%n\t%s%n", template.getId(), template.getDescription());
         }
 
         return null;

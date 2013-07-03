@@ -19,6 +19,7 @@
 package org.apache.provisionr.rundeck;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import javax.annotation.Generated;
 import javax.xml.bind.annotation.XmlAttribute;
 
 /**
@@ -59,6 +60,7 @@ public class Attribute {
     }
 
     @Override
+    @Generated("intellij")
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -72,6 +74,7 @@ public class Attribute {
     }
 
     @Override
+    @Generated("intellij")
     public int hashCode() {
         int result = name != null ? name.hashCode() : 0;
         result = 31 * result + (value != null ? value.hashCode() : 0);
@@ -79,6 +82,7 @@ public class Attribute {
     }
 
     @Override
+    @Generated("intellij")
     public String toString() {
         return "Attribute{" +
             "name='" + name + '\'' +

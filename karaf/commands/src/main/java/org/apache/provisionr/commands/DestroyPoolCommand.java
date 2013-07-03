@@ -48,7 +48,7 @@ public class DestroyPoolCommand extends OsgiCommandSupport {
     }
 
     @Override
-    protected Object doExecute() throws Exception {
+    protected Object doExecute() {
         checkNotNull(businessKey, "pool business key is mandatory");
 
         ProcessInstance instance = processEngine.getRuntimeService().createProcessInstanceQuery()

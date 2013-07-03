@@ -18,7 +18,7 @@
 
 package org.apache.provisionr.amazon.options;
 
-public class ProviderOptions {
+public final class ProviderOptions {
 
     private ProviderOptions() {
         /* singleton */

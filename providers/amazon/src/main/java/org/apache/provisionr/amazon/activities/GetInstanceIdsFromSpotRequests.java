@@ -40,7 +40,7 @@ public class GetInstanceIdsFromSpotRequests extends AmazonActivity {
     }
 
     @Override
-    public void execute(AmazonEC2 client, Pool pool, DelegateExecution execution) throws Exception {
+    public void execute(AmazonEC2 client, Pool pool, DelegateExecution execution) {
         LOG.info(">> retrieving instance Ids from spot request Ids");
 
         @SuppressWarnings("unchecked")
@@ -48,12 +48,14 @@ public class GetInstanceIdsFromSpotRequests extends AmazonActivity {
             (List<String>) execution.getVariable(ProcessVariables.SPOT_INSTANCE_REQUEST_IDS);
         DescribeSpotInstanceRequestsResult result = client.describeSpotInstanceRequests(
             new DescribeSpotInstanceRequestsRequest().withSpotInstanceRequestIds(requestIds));
+
         List<String> instanceIds = new ArrayList<String>();
         for (SpotInstanceRequest spotRequest : result.getSpotInstanceRequests()) {
             if (spotRequest.getInstanceId() != null) {
                 instanceIds.add(spotRequest.getInstanceId());
             }
         }
+
         execution.setVariable(ProcessVariables.INSTANCE_IDS, instanceIds);
     }
 

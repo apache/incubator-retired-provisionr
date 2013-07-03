@@ -36,7 +36,7 @@ import org.ops4j.pax.exam.options.extra.FeaturesScannerProvisionOption;
 /**
  * Helper methods for Karaf integration tests
  */
-public class KarafTests {
+public final class KarafTests {
 
     public static final String KARAF_GROUP_ID = "org.apache.karaf";
     public static final String KARAF_ARTIFACT_ID = "apache-karaf";

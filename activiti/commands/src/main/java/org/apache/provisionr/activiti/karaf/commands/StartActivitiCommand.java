@@ -33,7 +33,7 @@ public class StartActivitiCommand extends ActivitiCommand {
     private String definitionID;
 
     @Override
-    protected Object doExecute() throws Exception {
+    protected Object doExecute() {
         ProcessEngine pe = this.getProcessEngine();
         if (pe == null) {
             out().println("Process Engine NOT Found!");

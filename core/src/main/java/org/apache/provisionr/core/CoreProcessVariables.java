@@ -18,10 +18,9 @@
 
 package org.apache.provisionr.core;
 
-public class CoreProcessVariables {
+public final class CoreProcessVariables {
 
     private CoreProcessVariables() {
-        throw new RuntimeException("Should not instantiate");
     }
 
     /**

@@ -50,7 +50,7 @@ public class PublishListOfMachines extends AmazonActivity {
     }
 
     @Override
-    public void execute(AmazonEC2 client, Pool pool, DelegateExecution execution) throws Exception {
+    public void execute(AmazonEC2 client, Pool pool, DelegateExecution execution) {
         @SuppressWarnings("unchecked")
         List<String> instanceIds = (List<String>) execution.getVariable(ProcessVariables.INSTANCE_IDS);
         checkNotNull(instanceIds, "%s not found as a process variable", ProcessVariables.INSTANCE_IDS);

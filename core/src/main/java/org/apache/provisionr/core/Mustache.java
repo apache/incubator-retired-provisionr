@@ -33,7 +33,7 @@ import java.util.Map;
 /**
  * Utility functions for rendering mustache templates as strings
  */
-public class Mustache {
+public final class Mustache {
 
     private Mustache() {
     }
@@ -43,9 +43,17 @@ public class Mustache {
         return toString(Resources.getResource(contextClass, resource), scopes);
     }
 
+    /**
+     * Render a Mustache template as a String
+     *
+     * @param resource url to resource
+     * @param scopes
+     * @return
+     * @throws IOException
+     */
     public static String toString(URL resource, Map<String, ?> scopes) throws IOException {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        Writer writer = new OutputStreamWriter(outputStream);
+        Writer writer = new OutputStreamWriter(outputStream, Charsets.UTF_8);
 
         String content = Resources.toString(resource, Charsets.UTF_8);
 
@@ -54,7 +62,7 @@ public class Mustache {
             .execute(writer, scopes);
 
         writer.close();
-        return outputStream.toString();
+        return outputStream.toString("UTF-8");
     }
 
 }

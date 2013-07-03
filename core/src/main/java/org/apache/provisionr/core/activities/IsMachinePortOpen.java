@@ -18,7 +18,6 @@
 
 package org.apache.provisionr.core.activities;
 
-import org.apache.provisionr.api.pool.Machine;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import java.io.IOException;
@@ -26,6 +25,7 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import org.activiti.engine.delegate.DelegateExecution;
 import org.activiti.engine.delegate.JavaDelegate;
+import org.apache.provisionr.api.pool.Machine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -51,7 +51,7 @@ public class IsMachinePortOpen implements JavaDelegate {
     }
 
     @Override
-    public void execute(DelegateExecution execution) throws Exception {
+    public void execute(DelegateExecution execution) {
         Machine machine = (Machine) execution.getVariable(MACHINE);
         checkNotNull(machine, "expecting a process variable named machine (multi-instance?)");
 

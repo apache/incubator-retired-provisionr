@@ -19,13 +19,10 @@
 package org.apache.provisionr.core.activities;
 
 import static com.google.common.base.Preconditions.checkNotNull;
-
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-
 import java.util.List;
-
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.delegate.DelegateExecution;
 import org.activiti.engine.delegate.JavaDelegate;
@@ -46,22 +43,25 @@ public class KillMachineSetUpProcesses implements JavaDelegate {
     }
 
     @Override
-    public void execute(DelegateExecution execution) throws Exception {
+    public void execute(DelegateExecution execution) {
         @SuppressWarnings("unchecked")
         List<String> processIds = (List<String>) execution.getVariable(variableWithProcessIds);
 
-        List<String> forceEnded = Lists.newArrayList(Iterables.filter(processIds, new Predicate<String>() {
-            @Override
-            public boolean apply(String processInstanceId) {
-                ProcessInstance instance = runtimeService.createProcessInstanceQuery()
-                    .processInstanceId(processInstanceId).singleResult();
-                if (instance != null && !instance.isEnded()) {
-                    runtimeService.deleteProcessInstance(processInstanceId, "Pending process needs to be killed");
-                    return true;
+        List<String> forceEnded = Lists.newArrayList(Iterables.filter(processIds,
+            new Predicate<String>() {
+                @Override
+                public boolean apply(String processInstanceId) {
+                    ProcessInstance instance = runtimeService.createProcessInstanceQuery()
+                        .processInstanceId(processInstanceId).singleResult();
+                    if (instance != null && !instance.isEnded()) {
+                        runtimeService.deleteProcessInstance(processInstanceId,
+                            "Pending process needs to be killed");
+                        return true;
+                    }
+                    return false;
                 }
-                return false;
-            }
-        }));
-        LOG.info("Killed pending machine setup processes: {}", forceEnded);
+            }));
+
+        LOG.warn("Killed pending machine setup processes: {}", forceEnded);
     }
 }

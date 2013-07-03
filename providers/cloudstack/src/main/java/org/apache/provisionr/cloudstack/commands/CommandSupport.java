@@ -18,13 +18,13 @@
 
 package org.apache.provisionr.cloudstack.commands;
 
-import org.apache.provisionr.api.provider.Provider;
-import org.apache.provisionr.cloudstack.DefaultProviderConfig;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.io.Closeables;
 import java.io.PrintStream;
 import java.util.Properties;
 import org.apache.karaf.shell.console.OsgiCommandSupport;
+import org.apache.provisionr.api.provider.Provider;
+import org.apache.provisionr.cloudstack.DefaultProviderConfig;
 import org.jclouds.Constants;
 import org.jclouds.ContextBuilder;
 import org.jclouds.cloudstack.CloudStackApiMetadata;
@@ -40,7 +40,6 @@ import org.jclouds.rest.RestContext;
  */
 public abstract class CommandSupport extends OsgiCommandSupport {
 
-    private RestContext<CloudStackClient, CloudStackAsyncClient> context = null;
     public static final String CLOUDSTACK_SCOPE = "cloudstack";
 
     private final Provider provider;
@@ -53,9 +52,11 @@ public abstract class CommandSupport extends OsgiCommandSupport {
 
     @Override
     protected Object doExecute() throws Exception {
+        RestContext<CloudStackClient, CloudStackAsyncClient> context = null;
         try {
             context = newCloudStackContext(provider);
             return doExecuteWithContext(context.getApi(), System.out);
+
         } finally {
             Closeables.closeQuietly(context);
         }

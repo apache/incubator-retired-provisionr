@@ -37,7 +37,7 @@ public class KillActivitiCommand extends ActivitiCommand {
     private boolean killAll;
 
     @Override
-    protected Object doExecute() throws Exception {
+    protected Object doExecute() {
         ProcessEngine processEngine = this.getProcessEngine();
         if (processEngine == null) {
             out().println("Process Engine NOT Found!");
@@ -49,7 +49,7 @@ public class KillActivitiCommand extends ActivitiCommand {
         if (this.instanceIDs != null && this.instanceIDs.length > 0) {
             for (String instanceID : instanceIDs) {
                 runtimeService.deleteProcessInstance(instanceID, "Forcefully terminating the instance");
-                out().printf("Process instance %s terminated\n", instanceID);
+                out().printf("Process instance %s terminated%n", instanceID);
             }
             return null;
         }
@@ -63,7 +63,7 @@ public class KillActivitiCommand extends ActivitiCommand {
             for (ProcessInstance pi : piList) {
                 String instanceID = pi.getProcessInstanceId();
                 runtimeService.deleteProcessInstance(instanceID, "Forcefully terminating the instance");
-                out().printf("Process instance %s terminated\n", instanceID);
+                out().printf("Process instance %s terminated%n", instanceID);
             }
         }
 

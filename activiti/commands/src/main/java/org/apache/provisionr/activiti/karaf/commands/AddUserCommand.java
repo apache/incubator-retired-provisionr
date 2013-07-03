@@ -39,7 +39,7 @@ public class AddUserCommand extends ActivitiCommand {
     private String email = "";
 
     @Override
-    protected Object doExecute() throws Exception {
+    protected Object doExecute() {
         if (getProcessEngine() == null) {
             throw new NullPointerException("Please configure a processEngine instance for this command");
         }

@@ -81,7 +81,6 @@ public abstract class AbstractActivitiPrintHandler implements ActivitiPrintHandl
     protected void printVariable(PrintWriter out, HistoricVariableUpdate var) {
 
         LinkedHashMap<String, String> nvMap = new LinkedHashMap<String, String>();
-        // nvMap.put("Variable Type", var.getVariableTypeName());
         if (this.isVerbose()) {
             nvMap.put("Variable ID", var.getId());
             nvMap.put("Revision", "" + var.getRevision());

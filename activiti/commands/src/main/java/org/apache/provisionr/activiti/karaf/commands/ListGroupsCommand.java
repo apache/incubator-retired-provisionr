@@ -26,7 +26,7 @@ import org.apache.felix.gogo.commands.Command;
 public class ListGroupsCommand extends ActivitiCommand {
 
     @Override
-    protected Object doExecute() throws Exception {
+    protected Object doExecute() {
         List<Group> groups = getProcessEngine().getIdentityService()
             .createGroupQuery().orderByGroupId().asc().list();
 

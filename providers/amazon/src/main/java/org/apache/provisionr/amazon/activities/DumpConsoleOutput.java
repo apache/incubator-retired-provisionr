@@ -21,13 +21,14 @@ package org.apache.provisionr.amazon.activities;
 import com.amazonaws.services.ec2.AmazonEC2;
 import com.amazonaws.services.ec2.model.GetConsoleOutputRequest;
 import com.amazonaws.services.ec2.model.GetConsoleOutputResult;
+import com.google.common.base.Charsets;
+import static com.google.common.base.Preconditions.checkNotNull;
+import java.io.IOException;
+import net.schmizz.sshj.common.Base64;
+import org.activiti.engine.delegate.DelegateExecution;
 import org.apache.provisionr.amazon.core.ProviderClientCache;
 import org.apache.provisionr.api.pool.Machine;
 import org.apache.provisionr.api.pool.Pool;
-import com.google.common.base.Charsets;
-import static com.google.common.base.Preconditions.checkNotNull;
-import net.schmizz.sshj.common.Base64;
-import org.activiti.engine.delegate.DelegateExecution;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,7 +41,7 @@ public class DumpConsoleOutput extends AmazonActivity {
     }
 
     @Override
-    public void execute(AmazonEC2 client, Pool pool, DelegateExecution execution) throws Exception {
+    public void execute(AmazonEC2 client, Pool pool, DelegateExecution execution) throws IOException {
         Machine machine = (Machine) execution.getVariable("machine");
         checkNotNull(machine, "expecting 'machine' as a process variable");
 

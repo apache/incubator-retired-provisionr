@@ -22,10 +22,9 @@ package org.apache.provisionr.cloudstack;
  * {@link org.apache.provisionr.api.network.Network Network} configuration is passed via the
  * {@link org.apache.provisionr.api.pool.Pool Pool} object. This class stores names for those options.
  */
-public class NetworkOptions {
+public final class NetworkOptions {
 
     private NetworkOptions() {
-        throw new RuntimeException("Do not instantiate");
     }
 
     /**

@@ -38,7 +38,7 @@ public class AddGroupCommand extends ActivitiCommand {
     private String type = "security-role";
 
     @Override
-    protected Object doExecute() throws Exception {
+    protected Object doExecute() {
         IdentityService identityService = getProcessEngine().getIdentityService();
 
         Group group = identityService.newGroup(id);

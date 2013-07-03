@@ -18,9 +18,9 @@
 
 package org.apache.provisionr.cloudstack.commands;
 
-import org.apache.provisionr.cloudstack.DefaultProviderConfig;
 import java.io.PrintStream;
 import org.apache.felix.gogo.commands.Command;
+import org.apache.provisionr.cloudstack.DefaultProviderConfig;
 import org.jclouds.cloudstack.CloudStackClient;
 import org.jclouds.cloudstack.domain.Zone;
 
@@ -35,10 +35,10 @@ public class ZonesCommand extends CommandSupport {
     }
 
     @Override
-    public Object doExecuteWithContext(CloudStackClient client, PrintStream out) throws Exception {
-        out.printf("CloudStack zones for provider %s\n", getProvider().getId());
+    public Object doExecuteWithContext(CloudStackClient client, PrintStream out) {
+        out.printf("CloudStack zones for provider %s%n", getProvider().getId());
         for (Zone zone : client.getZoneClient().listZones()) {
-            out.printf("---\n%s\n", zone.toString());
+            out.printf("---%n%s%n", zone.toString());
         }
         out.println();
         return null;

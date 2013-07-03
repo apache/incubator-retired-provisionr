@@ -39,12 +39,8 @@ import org.activiti.engine.runtime.ProcessInstance;
 import org.apache.provisionr.api.pool.Machine;
 import org.apache.provisionr.api.pool.Pool;
 import org.apache.provisionr.core.CoreProcessVariables;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class RundeckServlet extends HttpServlet {
-
-    private static final Logger LOG = LoggerFactory.getLogger(RundeckServlet.class);
 
     private final ProcessEngine processEngine;
     private final Marshaller marshaller;
@@ -57,7 +53,8 @@ public class RundeckServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
         response.setContentType("application/xml;charset=UTF-8");
         writeRundeckResourceModelXmlTo(response.getWriter());
     }

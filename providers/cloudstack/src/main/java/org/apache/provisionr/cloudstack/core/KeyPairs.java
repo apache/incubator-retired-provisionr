@@ -18,7 +18,7 @@
 
 package org.apache.provisionr.cloudstack.core;
 
-public class KeyPairs {
+public final class KeyPairs {
 
     private KeyPairs() {
         // singleton

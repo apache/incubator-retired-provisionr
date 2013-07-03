@@ -43,7 +43,7 @@ public class SignalActivitiCommand extends ActivitiCommand {
     private String[] activities;
 
     @Override
-    protected Object doExecute() throws Exception {
+    protected Object doExecute() {
         ProcessEngine engine = this.getProcessEngine();
         if (engine == null) {
             out().println("Process Engine NOT Found!");
@@ -77,10 +77,10 @@ public class SignalActivitiCommand extends ActivitiCommand {
             if (!exec.isEnded()) {
                 rt.signal(exec.getId());
             } else {
-                out().printf("Execution %s already ended \n" + exec.getId());
+                out().printf("Execution %s already ended %n" + exec.getId());
             }
         } catch (Exception ex) {
-            out().printf("Exception:%s in signaling the execution %s \n", ex.getMessage(), exec.getId());
+            out().printf("Exception:%s in signaling the execution %s %n", ex.getMessage(), exec.getId());
         }
     }
 
@@ -96,7 +96,7 @@ public class SignalActivitiCommand extends ActivitiCommand {
             }
         } else {
             for (String activity : activities) {
-                out().printf("Signaling activity %s in process instance %s \n", activity, pi);
+                out().printf("Signaling activity %s in process instance %s %n", activity, pi);
                 List<Execution> executions = rt.createExecutionQuery()
                     .processInstanceId(pi)
                     .activityId(activity)

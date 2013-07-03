@@ -18,7 +18,7 @@
 
 package org.apache.provisionr.core;
 
-public class CoreSignals {
+public final class CoreSignals {
 
     private CoreSignals() {
     }

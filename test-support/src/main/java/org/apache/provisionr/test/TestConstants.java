@@ -23,7 +23,10 @@ import com.google.common.base.Throwables;
 import com.google.common.io.Resources;
 import java.io.IOException;
 
-public class TestConstants {
+public final class TestConstants {
+
+    private TestConstants() {
+    }
 
     static final String PUBLIC_KEY_FILE_NAME = "id_rsa_test.pub";
     static final String PRIVATE_KEY_FILE_NAME = "id_rsa_test";

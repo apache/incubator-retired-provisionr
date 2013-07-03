@@ -18,10 +18,10 @@
 
 package org.apache.provisionr.commands.predicates;
 
-import org.apache.provisionr.api.Provisionr;
 import com.google.common.base.Predicate;
+import org.apache.provisionr.api.Provisionr;
 
-public class ProvisionrPredicates {
+public final class ProvisionrPredicates {
 
     private ProvisionrPredicates() {
     }
@@ -31,7 +31,7 @@ public class ProvisionrPredicates {
 
             @Override
             public boolean apply(Provisionr candidate) {
-                return candidate.getId().equals(id);
+                return candidate != null && candidate.getId().equals(id);
             }
 
             @Override

@@ -51,7 +51,7 @@ public class VirtualMachines {
             .listVirtualMachines(ListVirtualMachinesOptions.Builder.name(vmName)), new Predicate<VirtualMachine>() {
             @Override
             public boolean apply(VirtualMachine input) {
-                return vmName.equals(input.getDisplayName());
+                return input != null && vmName.equals(input.getDisplayName());
             }
         });
 
@@ -101,7 +101,7 @@ public class VirtualMachines {
             .listVirtualMachines(ListVirtualMachinesOptions.Builder.name(vmName)), new Predicate<VirtualMachine>() {
             @Override
             public boolean apply(VirtualMachine input) {
-                return vmName.equals(input.getDisplayName());
+                return input != null && vmName.equals(input.getDisplayName());
             }
         });
         return Iterables.getOnlyElement(machines);

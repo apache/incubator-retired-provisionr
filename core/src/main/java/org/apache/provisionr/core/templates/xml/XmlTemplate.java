@@ -19,6 +19,7 @@
 package org.apache.provisionr.core.templates.xml;
 
 import com.google.common.annotations.VisibleForTesting;
+import com.google.common.base.Charsets;
 import static com.google.common.base.Preconditions.checkNotNull;
 import com.google.common.base.Throwables;
 import static com.google.common.collect.Lists.newArrayList;
@@ -26,9 +27,12 @@ import com.google.common.io.CharStreams;
 import com.google.common.io.Closeables;
 import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileReader;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.List;
+import javax.annotation.Generated;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -62,7 +66,7 @@ public class XmlTemplate implements PoolTemplate {
         try {
             JAXBContext context = JAXBContext.newInstance(XmlTemplate.class);
             return (XmlTemplate) context.createUnmarshaller()
-                .unmarshal(new ByteArrayInputStream(content.getBytes()));
+                .unmarshal(new ByteArrayInputStream(content.getBytes(Charsets.UTF_8)));
 
         } catch (JAXBException e) {
             throw Throwables.propagate(e);
@@ -73,14 +77,19 @@ public class XmlTemplate implements PoolTemplate {
      * @return an XmlTemplate instance resulted from parsing a file
      */
     public static XmlTemplate newXmlTemplate(File file) {
-        FileReader reader = null;
+        Reader reader = null;
+        FileInputStream inputStream = null;
         try {
-            reader = new FileReader(file);
+            inputStream = new FileInputStream(file);
+            reader = new InputStreamReader(inputStream, Charsets.UTF_8);
+
             return newXmlTemplate(CharStreams.toString(reader));
 
         } catch (IOException e) {
             throw Throwables.propagate(e);
+
         } finally {
+            Closeables.closeQuietly(inputStream);
             Closeables.closeQuietly(reader);
         }
     }
@@ -215,6 +224,7 @@ public class XmlTemplate implements PoolTemplate {
     }
 
     @Override
+    @Generated("intellij")
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -233,6 +243,7 @@ public class XmlTemplate implements PoolTemplate {
     }
 
     @Override
+    @Generated("intellij")
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (description != null ? description.hashCode() : 0);
@@ -245,6 +256,7 @@ public class XmlTemplate implements PoolTemplate {
     }
 
     @Override
+    @Generated("intellij")
     public String toString() {
         return "XmlTemplate{" +
             "id='" + id + '\'' +

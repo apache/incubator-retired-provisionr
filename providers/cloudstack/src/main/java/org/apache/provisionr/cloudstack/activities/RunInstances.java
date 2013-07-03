@@ -18,14 +18,13 @@
 
 package org.apache.provisionr.cloudstack.activities;
 
+import org.activiti.engine.delegate.DelegateExecution;
 import org.apache.provisionr.api.pool.Pool;
 import org.apache.provisionr.cloudstack.ProviderOptions;
 import org.apache.provisionr.cloudstack.core.KeyPairs;
 import org.apache.provisionr.cloudstack.core.Networks;
 import org.apache.provisionr.cloudstack.core.VirtualMachines;
-import org.activiti.engine.delegate.DelegateExecution;
 import org.jclouds.cloudstack.CloudStackClient;
-import org.jclouds.cloudstack.domain.AsyncCreateResponse;
 import org.jclouds.cloudstack.options.DeployVirtualMachineOptions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,14 +45,14 @@ public class RunInstances extends CloudStackActivity {
 
         LOG.info("Starting instances!");
 
-        AsyncCreateResponse asyncCreateResponse = cloudStackClient.getVirtualMachineClient()
-            .deployVirtualMachineInZone(zoneId, serviceOffering, templateId,
-                DeployVirtualMachineOptions.Builder
-                    .displayName(businessKey)
-                    .group(businessKey)
-                    .networkId(Networks.formatNameFromBusinessKey(businessKey))
-                    .keyPair(keyPairName)
-                    .name(businessKey));
+        cloudStackClient.getVirtualMachineClient().deployVirtualMachineInZone(
+            zoneId, serviceOffering, templateId,
+            DeployVirtualMachineOptions.Builder
+                .displayName(businessKey)
+                .group(businessKey)
+                .networkId(Networks.formatNameFromBusinessKey(businessKey))
+                .keyPair(keyPairName)
+                .name(businessKey));
 
         VirtualMachines.waitForVMtoStart(cloudStackClient, businessKey);
     }

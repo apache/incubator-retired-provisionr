@@ -22,6 +22,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import com.google.common.collect.Range;
 import com.google.common.collect.Ranges;
+import org.apache.provisionr.api.pool.Machine;
 
 public class RuleBuilder {
 
@@ -44,7 +45,8 @@ public class RuleBuilder {
         checkArgument(ports.hasLowerBound(), "ports should have a closed lower bound ");
 
         checkArgument(ports.lowerEndpoint() > 0, "ports should be a positive range");
-        checkArgument(ports.upperEndpoint() < 65535, "ports upper bound should less than 65535");
+        checkArgument(ports.upperEndpoint() < Machine.MAX_PORT_NUMBER,
+            "ports upper bound should less than 65535");
 
         this.ports = checkNotNull(ports, "ports is null");
         return this;

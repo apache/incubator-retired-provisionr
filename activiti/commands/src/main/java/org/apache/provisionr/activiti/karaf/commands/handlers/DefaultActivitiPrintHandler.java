@@ -16,14 +16,13 @@
 
 package org.apache.provisionr.activiti.karaf.commands.handlers;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import java.io.PrintWriter;
 import java.io.StringReader;
 import java.lang.reflect.Modifier;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import org.apache.provisionr.activiti.karaf.commands.util.Commands;
 
 /**
@@ -47,7 +46,8 @@ public class DefaultActivitiPrintHandler extends AbstractActivitiPrintHandler {
         try {
             jsonText = gson.toJson(varValue);
         } catch (Exception ex) {
-            jsonText = "{\n  " + varValue + "\n}"; // use default toString object            
+            // use default toString object
+            jsonText = String.format("{%n%s%n}", varValue);
             LOG.log(Level.SEVERE, "Serializing Activiti Variable. " + ex.getMessage(), ex);
         }
 

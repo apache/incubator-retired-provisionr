@@ -18,7 +18,7 @@
 
 package org.apache.provisionr.amazon.options;
 
-public class SoftwareOptions {
+public final class SoftwareOptions {
 
     private SoftwareOptions() {
         /* singleton */

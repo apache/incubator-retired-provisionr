@@ -18,11 +18,11 @@
 
 package org.apache.provisionr.api.pool;
 
-import org.apache.provisionr.api.util.WithOptions;
 import com.google.common.base.Objects;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import java.util.Map;
+import org.apache.provisionr.api.util.WithOptions;
 
 /**
  * Details about a running machine from a pool
@@ -30,6 +30,8 @@ import java.util.Map;
  * Used to connect to that machine for configuration.
  */
 public class Machine extends WithOptions {
+
+    public static final int MAX_PORT_NUMBER = 65535;
 
     public static MachineBuilder builder() {
         return new MachineBuilder();
@@ -76,7 +78,7 @@ public class Machine extends WithOptions {
         this.privateDnsName = checkNotNull(privateDnsName, "privateDnsName is null");
         this.privateIp = checkNotNull(privateIp, "privateIp is null");
 
-        checkArgument(sshPort > 0 && sshPort < 65535, "invalid port number for ssh");
+        checkArgument(sshPort > 0 && sshPort <= MAX_PORT_NUMBER, "invalid port number for ssh");
         this.sshPort = sshPort;
     }
 

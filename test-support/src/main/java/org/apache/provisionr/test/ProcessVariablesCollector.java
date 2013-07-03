@@ -44,7 +44,7 @@ public class ProcessVariablesCollector implements Answer<Void> {
     }
 
     @Override
-    public Void answer(InvocationOnMock invocation) throws Throwable {
+    public Void answer(InvocationOnMock invocation) {
         Object[] arguments = invocation.getArguments();
         LOG.info("Got method call {} with arguments {}",
             invocation.getMethod().getName(), Arrays.toString(arguments));

@@ -51,7 +51,7 @@ public class ListPoolsCommand extends OsgiCommandSupport {
     }
 
     @Override
-    protected Object doExecute() throws Exception {
+    protected Object doExecute() {
         List<ProcessInstance> processes;
         if (key.isEmpty()) {
             processes = processEngine.getRuntimeService().createProcessInstanceQuery().list();

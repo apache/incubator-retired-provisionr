@@ -19,6 +19,7 @@
 package org.apache.provisionr.amazon.activities;
 
 import com.google.common.base.Charsets;
+import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.io.Resources;
 import java.io.IOException;
@@ -47,12 +48,17 @@ public class SetupAdminAccess extends PuppetActivity {
     }
 
     @Override
-    public String createPuppetScript(Pool pool, Machine machine) throws Exception {
-        return Mustache.toString(getClass(), ADMIN_ACCESS_TEMPLATE,
-            ImmutableMap.of(
-                "user", pool.getAdminAccess().getUsername(),
-                "publicKey", getRawSshKey(pool))
-        );
+    public String createPuppetScript(Pool pool, Machine machine) {
+        try {
+            return Mustache.toString(getClass(), ADMIN_ACCESS_TEMPLATE,
+                ImmutableMap.of(
+                    "user", pool.getAdminAccess().getUsername(),
+                    "publicKey", getRawSshKey(pool))
+            );
+
+        } catch (IOException e) {
+            throw Throwables.propagate(e);
+        }
     }
 
     private String getRawSshKey(Pool pool) {
@@ -60,14 +66,19 @@ public class SetupAdminAccess extends PuppetActivity {
     }
 
     @Override
-    public Map<String, String> createAdditionalFiles(Pool pool, Machine machine) throws IOException {
-        return ImmutableMap.of(
-            "/tmp/sshd_config",
-            Mustache.toString(getClass(), SSHD_CONFIG_TEMPLATE,
-                ImmutableMap.of("user", pool.getAdminAccess().getUsername())),
-            "/tmp/sudoers",
-            Resources.toString(Resources.getResource(getClass(), SUDOERS_TEMPLATE), Charsets.UTF_8)
-        );
+    public Map<String, String> createAdditionalFiles(Pool pool, Machine machine) {
+        try {
+            return ImmutableMap.of(
+                "/tmp/sshd_config",
+                Mustache.toString(getClass(), SSHD_CONFIG_TEMPLATE,
+                    ImmutableMap.of("user", pool.getAdminAccess().getUsername())),
+                "/tmp/sudoers",
+                Resources.toString(Resources.getResource(getClass(), SUDOERS_TEMPLATE), Charsets.UTF_8)
+            );
+
+        } catch (IOException e) {
+            throw Throwables.propagate(e);
+        }
 
     }
 }

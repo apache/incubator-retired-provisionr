@@ -18,10 +18,6 @@
 
 package org.apache.provisionr.core.activities;
 
-import org.apache.provisionr.api.pool.Machine;
-import org.apache.provisionr.api.pool.Pool;
-import org.apache.provisionr.core.CoreConstants;
-import org.apache.provisionr.core.CoreProcessVariables;
 import static com.google.common.base.Preconditions.checkNotNull;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
@@ -30,6 +26,10 @@ import org.activiti.engine.ProcessEngine;
 import org.activiti.engine.delegate.DelegateExecution;
 import org.activiti.engine.delegate.JavaDelegate;
 import org.activiti.engine.runtime.ProcessInstance;
+import org.apache.provisionr.api.pool.Machine;
+import org.apache.provisionr.api.pool.Pool;
+import org.apache.provisionr.core.CoreConstants;
+import org.apache.provisionr.core.CoreProcessVariables;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -61,7 +61,7 @@ public class SpawnProcessForEachMachine implements JavaDelegate {
     }
 
     @Override
-    public void execute(DelegateExecution execution) throws Exception {
+    public void execute(DelegateExecution execution) {
         final Pool pool = (Pool) execution.getVariable(CoreProcessVariables.POOL);
         checkNotNull(pool, "Expecting to find a pool description as process variable");
 

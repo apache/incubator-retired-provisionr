@@ -18,11 +18,6 @@
 
 package org.apache.provisionr.core.activities;
 
-import org.apache.provisionr.api.access.AdminAccess;
-import org.apache.provisionr.api.pool.Machine;
-import org.apache.provisionr.api.pool.Pool;
-import org.apache.provisionr.core.CoreProcessVariables;
-import org.apache.provisionr.core.Ssh;
 import static com.google.common.base.Preconditions.checkNotNull;
 import com.google.common.collect.ImmutableMap;
 import java.util.Map;
@@ -30,6 +25,11 @@ import net.schmizz.sshj.SSHClient;
 import net.schmizz.sshj.connection.channel.direct.Session;
 import org.activiti.engine.delegate.DelegateExecution;
 import org.activiti.engine.delegate.JavaDelegate;
+import org.apache.provisionr.api.access.AdminAccess;
+import org.apache.provisionr.api.pool.Machine;
+import org.apache.provisionr.api.pool.Pool;
+import org.apache.provisionr.core.CoreProcessVariables;
+import org.apache.provisionr.core.Ssh;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -62,7 +62,7 @@ public abstract class PuppetActivity implements JavaDelegate {
     /**
      * This method creates a Puppet script for remote execution
      */
-    public abstract String createPuppetScript(Pool pool, Machine machine) throws Exception;
+    public abstract String createPuppetScript(Pool pool, Machine machine);
 
     /**
      * Override this method to change the credentials used for SSH access
@@ -74,7 +74,7 @@ public abstract class PuppetActivity implements JavaDelegate {
     /**
      * Map of additional files to create on the remote machine. Contains pairs of (remotePath, content)
      */
-    public Map<String, String> createAdditionalFiles(Pool pool, Machine machine) throws Exception {
+    public Map<String, String> createAdditionalFiles(Pool pool, Machine machine) {
         return ImmutableMap.of();
     }
 

@@ -18,10 +18,6 @@
 
 package org.apache.provisionr.core;
 
-import org.apache.provisionr.api.access.AdminAccess;
-import org.apache.provisionr.api.pool.Machine;
-import org.apache.provisionr.core.logging.ErrorStreamLogger;
-import org.apache.provisionr.core.logging.InfoStreamLogger;
 import com.google.common.base.Charsets;
 import static com.google.common.base.Preconditions.checkArgument;
 import java.io.ByteArrayInputStream;
@@ -34,12 +30,16 @@ import net.schmizz.sshj.connection.channel.direct.Session;
 import net.schmizz.sshj.transport.verification.HostKeyVerifier;
 import net.schmizz.sshj.userauth.keyprovider.OpenSSHKeyFile;
 import net.schmizz.sshj.xfer.InMemorySourceFile;
+import org.apache.provisionr.api.access.AdminAccess;
+import org.apache.provisionr.api.pool.Machine;
+import org.apache.provisionr.core.logging.ErrorStreamLogger;
+import org.apache.provisionr.core.logging.InfoStreamLogger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 
-public class Ssh {
+public final class Ssh {
 
     private static final Logger LOG = LoggerFactory.getLogger(Ssh.class);
 

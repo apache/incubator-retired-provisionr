@@ -49,19 +49,20 @@ public class CheckProcessesEnded implements JavaDelegate {
     }
 
     @Override
-    public void execute(DelegateExecution execution) throws Exception {
+    public void execute(DelegateExecution execution) {
         @SuppressWarnings("unchecked")
         List<String> processIds = (List<String>) execution.getVariable(variableWithProcessIds);
 
-        List<String> ended = Lists.newArrayList(Iterables.filter(processIds, new Predicate<String>() {
-            @Override
-            public boolean apply(String processInstanceId) {
-                ProcessInstance instance = runtimeService.createProcessInstanceQuery()
-                    .processInstanceId(processInstanceId).singleResult();
+        List<String> ended = Lists.newArrayList(Iterables.filter(processIds,
+            new Predicate<String>() {
+                @Override
+                public boolean apply(String processInstanceId) {
+                    ProcessInstance instance = runtimeService.createProcessInstanceQuery()
+                        .processInstanceId(processInstanceId).singleResult();
 
-                return instance == null || instance.isEnded();
-            }
-        }));
+                    return instance == null || instance.isEnded();
+                }
+            }));
 
         boolean done = (processIds.size() == ended.size());
         execution.setVariable(resultVariable, done);

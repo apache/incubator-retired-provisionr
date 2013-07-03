@@ -26,7 +26,7 @@ import org.apache.felix.gogo.commands.Command;
 public class ListUsersCommand extends ActivitiCommand {
 
     @Override
-    protected Object doExecute() throws Exception {
+    protected Object doExecute() {
         List<User> users = getProcessEngine().getIdentityService()
             .createUserQuery().orderByUserId().asc().list();
 

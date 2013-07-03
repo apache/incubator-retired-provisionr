@@ -18,15 +18,16 @@
 
 package org.apache.provisionr.core.activities;
 
-import org.apache.provisionr.api.pool.Machine;
-import org.apache.provisionr.api.pool.Pool;
-import org.apache.provisionr.api.software.Software;
-import org.apache.provisionr.core.Mustache;
+import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import org.apache.provisionr.api.pool.Machine;
+import org.apache.provisionr.api.pool.Pool;
+import org.apache.provisionr.api.software.Software;
+import org.apache.provisionr.core.Mustache;
 
 public class InstallPackages extends PuppetActivity {
 
@@ -37,9 +38,14 @@ public class InstallPackages extends PuppetActivity {
     }
 
     @Override
-    public String createPuppetScript(Pool pool, Machine machine) throws IOException {
-        return Mustache.toString(InstallPackages.class, PACKAGES_TEMPLATE,
-            ImmutableMap.of("packages", packagesAsListOfMaps(pool.getSoftware())));
+    public String createPuppetScript(Pool pool, Machine machine) {
+        try {
+            return Mustache.toString(InstallPackages.class, PACKAGES_TEMPLATE,
+                ImmutableMap.of("packages", packagesAsListOfMaps(pool.getSoftware())));
+
+        } catch (IOException e) {
+            throw Throwables.propagate(e);
+        }
     }
 
     private List<Map<String, String>> packagesAsListOfMaps(Software software) {

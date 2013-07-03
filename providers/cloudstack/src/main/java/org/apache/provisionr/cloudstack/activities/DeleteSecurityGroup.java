@@ -18,16 +18,12 @@
 
 package org.apache.provisionr.cloudstack.activities;
 
+import org.activiti.engine.delegate.DelegateExecution;
 import org.apache.provisionr.api.pool.Pool;
 import org.apache.provisionr.cloudstack.core.SecurityGroups;
-import org.activiti.engine.delegate.DelegateExecution;
 import org.jclouds.cloudstack.CloudStackClient;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class DeleteSecurityGroup extends CloudStackActivity {
-
-    private static final Logger LOG = LoggerFactory.getLogger(DeleteSecurityGroup.class);
 
     @Override
     public void execute(CloudStackClient cloudStackClient, Pool pool, DelegateExecution execution) {

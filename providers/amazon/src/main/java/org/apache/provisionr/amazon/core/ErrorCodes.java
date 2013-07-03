@@ -18,7 +18,7 @@
 
 package org.apache.provisionr.amazon.core;
 
-public class ErrorCodes {
+public final class ErrorCodes {
 
     private ErrorCodes() {
         /* singleton */

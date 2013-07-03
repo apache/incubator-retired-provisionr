@@ -28,7 +28,7 @@ public class DeleteGroupCommand extends ActivitiCommand {
     private String id;
 
     @Override
-    protected Object doExecute() throws Exception {
+    protected Object doExecute() {
         getProcessEngine().getIdentityService().deleteGroup(id);
         return null;
     }

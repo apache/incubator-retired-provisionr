@@ -19,14 +19,17 @@
 package org.apache.provisionr.amazon.functions;
 
 import com.amazonaws.services.ec2.model.IpPermission;
-import org.apache.provisionr.api.network.Rule;
 import com.google.common.base.Function;
+import static com.google.common.base.Preconditions.checkNotNull;
+import org.apache.provisionr.api.network.Rule;
 
 public enum ConvertRuleToIpPermission implements Function<Rule, IpPermission> {
     FUNCTION;
 
     @Override
     public IpPermission apply(Rule rule) {
+        checkNotNull(rule, "rule is null");
+
         IpPermission permission = new IpPermission()
             .withIpProtocol(rule.getProtocol().toString().toLowerCase())
             .withIpRanges(rule.getCidr());

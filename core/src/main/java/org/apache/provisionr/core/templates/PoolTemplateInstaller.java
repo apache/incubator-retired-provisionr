@@ -18,12 +18,12 @@
 
 package org.apache.provisionr.core.templates;
 
-import org.apache.provisionr.core.templates.xml.XmlTemplate;
 import static com.google.common.base.Preconditions.checkNotNull;
 import com.google.common.collect.Maps;
 import java.io.File;
 import java.util.concurrent.ConcurrentMap;
 import org.apache.felix.fileinstall.ArtifactInstaller;
+import org.apache.provisionr.core.templates.xml.XmlTemplate;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
@@ -69,7 +69,7 @@ public class PoolTemplateInstaller implements ArtifactInstaller {
      * The absolute file path is the unique identifier
      */
     @Override
-    public void install(File file) throws Exception {
+    public void install(File file) {
         final String absolutePath = file.getAbsolutePath();
         LOG.info("Installing Pool template from  " + absolutePath);
 
@@ -87,7 +87,7 @@ public class PoolTemplateInstaller implements ArtifactInstaller {
      * Uninstall a pool description identified by the absolute file path
      */
     @Override
-    public void uninstall(File file) throws Exception {
+    public void uninstall(File file) {
         final String absolutePath = file.getAbsolutePath();
         LOG.info("Uninstalling Pool template for path " + absolutePath);
 
@@ -102,7 +102,7 @@ public class PoolTemplateInstaller implements ArtifactInstaller {
      * This method performs no actions if there is no pool registered for this file
      */
     @Override
-    public void update(File file) throws Exception {
+    public void update(File file) {
         if (templates.containsKey(file.getAbsolutePath())) {
             uninstall(file);
             install(file);

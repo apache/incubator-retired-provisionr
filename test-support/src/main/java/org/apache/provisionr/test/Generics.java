@@ -18,10 +18,9 @@
 
 package org.apache.provisionr.test;
 
+import static com.google.common.base.Preconditions.checkNotNull;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-
-import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Helper methods for class type parameters.
@@ -29,7 +28,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @see <a href="https://github.com/codahale/dropwizard/blob/master/dropwizard-core/src/main/java/com/yammer/dropwizard/util/Generics.java">Generics in Codahale Dropwizard</a>
  * @see <a href="http://gafter.blogspot.com/2006/12/super-type-tokens.html">Super Type Tokens</a>
  */
-public class Generics {
+public final class Generics {
     private Generics() { /* singleton */ }
 
     /**

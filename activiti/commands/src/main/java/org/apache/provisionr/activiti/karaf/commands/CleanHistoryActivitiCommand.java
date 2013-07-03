@@ -41,7 +41,7 @@ public class CleanHistoryActivitiCommand extends ActivitiCommand {
     private String[] definitionIDs;
 
     @Override
-    protected Object doExecute() throws Exception {
+    protected Object doExecute() {
         ProcessEngine engine = this.getProcessEngine();
         if (engine == null) {
             out().println("Process Engine NOT Found!");
@@ -49,7 +49,7 @@ public class CleanHistoryActivitiCommand extends ActivitiCommand {
         }
         HistoryService historyService = engine.getHistoryService();
 
-        // order of priority if instnaceIDs or definitionIDs and all on the list
+        // order of priority if instanceIDs or definitionIDs and all on the list
         // process instnaceID and exist or process definitionIDs and exit or process all 
         // TODO figure out how to add mutually exclusive options - instanceIDs | definitions | all
 
@@ -86,7 +86,7 @@ public class CleanHistoryActivitiCommand extends ActivitiCommand {
         for (HistoricProcessInstance hpi : hpiList) {
             String processId = hpi.getId();
             hs.deleteHistoricProcessInstance(hpi.getId());
-            out().printf("History removed for process instance %s \n", processId);
+            out().printf("History removed for process instance %s %n", processId);
         }
     }
 
@@ -97,9 +97,9 @@ public class CleanHistoryActivitiCommand extends ActivitiCommand {
                 .processInstanceId(instanceId).singleResult();
             if (hpi != null) {
                 hs.deleteHistoricProcessInstance(hpi.getId());
-                out().printf("History removed for process instance %s \n", hpi.getId());
+                out().printf("History removed for process instance %s %n", hpi.getId());
             } else {
-                out().printf("No History found for process instance %s \n", instanceId);
+                out().printf("No History found for process instance %s %n", instanceId);
             }
         }
     }
@@ -111,13 +111,13 @@ public class CleanHistoryActivitiCommand extends ActivitiCommand {
                 .processDefinitionId(definitionId)
                 .orderByProcessDefinitionId().asc().list();
             if (hpiList == null || hpiList.size() == 0) {
-                out().printf("No History found for process definition %s \n", definitionId);
+                out().printf("No History found for process definition %s %n", definitionId);
                 break;
             }
             for (HistoricProcessInstance hpi : hpiList) {
                 String processId = hpi.getId();
                 hs.deleteHistoricProcessInstance(hpi.getId());
-                out().printf("History removed for process instance %s with definition %s\n", processId,
+                out().printf("History removed for process instance %s with definition %s%n", processId,
                     definitionId);
             }
         }

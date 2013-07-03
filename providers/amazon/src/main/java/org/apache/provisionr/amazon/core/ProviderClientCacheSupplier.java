@@ -53,7 +53,7 @@ public class ProviderClientCacheSupplier implements Supplier<ProviderClientCache
     private static class ProviderClientCacheLoader extends CacheLoader<Provider, AmazonEC2> {
 
         @Override
-        public AmazonEC2 load(Provider provider) throws Exception {
+        public AmazonEC2 load(Provider provider) {
             String region = Optional.fromNullable(provider.getOptions().get(ProviderOptions.REGION))
                 .or(ProviderOptions.DEFAULT_REGION);
 

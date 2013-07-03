@@ -21,16 +21,16 @@ package org.apache.provisionr.core;
 /**
  * A standard set of pool statuses
  */
-public class PoolStatus {
+public final class PoolStatus {
 
     private PoolStatus() {
     }
 
-    public static String UNDEFINED = "undefined";
+    public static final String UNDEFINED = "undefined";
 
-    public static String SETUP = "setup";
+    public static final String SETUP = "setup";
 
-    public static String READY = "ready";
+    public static final String READY = "ready";
 
-    public static String TERMINATED = "terminated";
+    public static final String TERMINATED = "terminated";
 }

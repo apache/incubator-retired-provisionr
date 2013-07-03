@@ -81,6 +81,7 @@ public class ImageTable {
             new Function<Map.Entry<String, String>, Table.Cell<String, String, String>>() {
                 @Override
                 public Table.Cell<String, String, String> apply(Map.Entry<String, String> entry) {
+                    checkNotNull(entry, "entry is null");
                     return Tables.immutableCell(rowKey, entry.getKey(), entry.getValue());
                 }
             });

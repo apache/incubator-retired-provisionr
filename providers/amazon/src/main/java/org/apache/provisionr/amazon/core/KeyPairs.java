@@ -18,7 +18,7 @@
 
 package org.apache.provisionr.amazon.core;
 
-public class KeyPairs {
+public final class KeyPairs {
 
     private KeyPairs() {
         /* singleton */

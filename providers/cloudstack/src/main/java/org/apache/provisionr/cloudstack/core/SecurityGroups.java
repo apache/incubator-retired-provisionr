@@ -18,14 +18,14 @@
 
 package org.apache.provisionr.cloudstack.core;
 
-import org.apache.provisionr.api.network.Network;
-import org.apache.provisionr.api.network.Protocol;
-import org.apache.provisionr.api.network.Rule;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import java.util.NoSuchElementException;
 import java.util.Set;
+import org.apache.provisionr.api.network.Network;
+import org.apache.provisionr.api.network.Protocol;
+import org.apache.provisionr.api.network.Rule;
 import org.jclouds.cloudstack.CloudStackClient;
 import org.jclouds.cloudstack.domain.IngressRule;
 import org.jclouds.cloudstack.domain.SecurityGroup;
@@ -34,7 +34,7 @@ import static org.jclouds.cloudstack.options.ListSecurityGroupsOptions.Builder.n
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class SecurityGroups {
+public final class SecurityGroups {
 
     private static final Logger LOG = LoggerFactory.getLogger(SecurityGroup.class);
     public static final int DEFAULT_ICMP_CODE = 0;

@@ -18,16 +18,17 @@
 
 package org.apache.provisionr.api.pool;
 
+import com.google.common.base.Objects;
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
+import java.util.Map;
+import javax.annotation.Generated;
 import org.apache.provisionr.api.access.AdminAccess;
 import org.apache.provisionr.api.hardware.Hardware;
 import org.apache.provisionr.api.network.Network;
 import org.apache.provisionr.api.provider.Provider;
 import org.apache.provisionr.api.software.Software;
 import org.apache.provisionr.api.util.WithOptions;
-import com.google.common.base.Objects;
-import static com.google.common.base.Preconditions.checkArgument;
-import static com.google.common.base.Preconditions.checkNotNull;
-import java.util.Map;
 
 public class Pool extends WithOptions {
 
@@ -115,6 +116,7 @@ public class Pool extends WithOptions {
     }
 
     @Override
+    @Generated("intellij")
     public boolean equals(Object obj) {
         if (obj == null) {
             return false;
@@ -132,6 +134,7 @@ public class Pool extends WithOptions {
     }
 
     @Override
+    @Generated("intellij")
     public String toString() {
         return "Pool{" +
             "provider=" + provider +

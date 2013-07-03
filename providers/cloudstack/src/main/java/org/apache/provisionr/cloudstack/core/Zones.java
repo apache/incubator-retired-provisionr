@@ -25,7 +25,7 @@ import java.util.Set;
 import org.jclouds.cloudstack.CloudStackClient;
 import org.jclouds.cloudstack.domain.Zone;
 
-public class Zones {
+public final class Zones {
 
     private Zones() {
     }
@@ -34,7 +34,7 @@ public class Zones {
         Set<Zone> ourZone = Sets.filter(cloudStackClient.getZoneClient().listZones(), new Predicate<Zone>() {
             @Override
             public boolean apply(Zone input) {
-                return input.getName().equals(zoneName);
+                return input != null && input.getName().equals(zoneName);
             }
         });
         return Iterables.getOnlyElement(ourZone).isSecurityGroupsEnabled();

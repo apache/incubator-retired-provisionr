@@ -22,6 +22,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import com.google.common.collect.Lists;
 import java.util.Collections;
 import java.util.List;
+import javax.annotation.Generated;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -56,6 +57,7 @@ public class Project {
     }
 
     @Override
+    @Generated("intellij")
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -67,6 +69,7 @@ public class Project {
     }
 
     @Override
+    @Generated("intellij")
     public int hashCode() {
         return nodes != null ? nodes.hashCode() : 0;
     }

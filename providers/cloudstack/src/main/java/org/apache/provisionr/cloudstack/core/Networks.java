@@ -26,7 +26,7 @@ import java.util.Set;
 import org.jclouds.cloudstack.CloudStackClient;
 import org.jclouds.cloudstack.domain.Network;
 
-public class Networks {
+public final class Networks {
 
     private Networks() {
     }
@@ -42,12 +42,14 @@ public class Networks {
      * @throws IllegalArgumentException if more networks with the same name are found
      */
     public static Network getByName(CloudStackClient client, final String networkName) {
-        Set<Network> networks = Sets.filter(client.getNetworkClient().listNetworks(), new Predicate<Network>() {
-            @Override
-            public boolean apply(Network input) {
-                return input.getName().equals(networkName);
-            }
-        });
+        Set<Network> networks = Sets.filter(client.getNetworkClient().listNetworks(),
+            new Predicate<Network>() {
+                @Override
+                public boolean apply(Network network) {
+                    return network != null && network.getName().equals(networkName);
+                }
+            });
+
         return Iterables.getOnlyElement(networks);
     }
 }

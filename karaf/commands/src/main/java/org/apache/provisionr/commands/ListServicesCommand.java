@@ -18,7 +18,6 @@
 
 package org.apache.provisionr.commands;
 
-import org.apache.provisionr.api.Provisionr;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Joiner;
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -27,6 +26,7 @@ import java.io.PrintStream;
 import java.util.List;
 import org.apache.felix.gogo.commands.Command;
 import org.apache.karaf.shell.console.OsgiCommandSupport;
+import org.apache.provisionr.api.Provisionr;
 
 @Command(scope = "provisionr", name = "services", description = "List provisioning services")
 public class ListServicesCommand extends OsgiCommandSupport {
@@ -40,7 +40,7 @@ public class ListServicesCommand extends OsgiCommandSupport {
     }
 
     @Override
-    protected Object doExecute() throws Exception {
+    protected Object doExecute() {
         List<String> ids = Lists.newArrayList();
         for (Provisionr service : services) {
             ids.add(service.getId());

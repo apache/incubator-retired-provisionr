@@ -46,7 +46,7 @@ public class CheckAllRequestsAreActive extends AllSpotRequestsMatchPredicate {
     }
 
     @Override
-    public void execute(AmazonEC2 client, Pool pool, DelegateExecution execution) throws Exception {
+    public void execute(AmazonEC2 client, Pool pool, DelegateExecution execution) {
         super.execute(client, pool, execution);
     }
 }

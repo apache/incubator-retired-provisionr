@@ -41,9 +41,10 @@ public class CreateImageCommand extends CreateCommand {
 
     @Override
     protected Object doExecute() throws Exception {
-        Provisionr service = getService();
-        final Pool pool = createPoolOfOne(service);
+        // Provisionr service = getService();
+        // final Pool pool = createPoolOfOne(service);
         // TODO: create service.startCachingProcess(uuid, pool) in the Provisionr class
+
         return null;
     }
 

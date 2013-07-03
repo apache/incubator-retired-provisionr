@@ -18,29 +18,32 @@
 
 package org.apache.provisionr.cloudstack.core;
 
+import com.google.common.base.Function;
+import static com.google.common.base.Preconditions.checkNotNull;
 import org.apache.provisionr.api.network.Protocol;
 import org.apache.provisionr.api.network.Rule;
-import com.google.common.base.Function;
 import org.jclouds.cloudstack.domain.IngressRule;
 
 public enum ConvertIngressRuleToRule implements Function<IngressRule, Rule> {
     FUNCTION;
 
     @Override
-    public Rule apply(IngressRule input) {
+    public Rule apply(IngressRule ingressRule) {
+        checkNotNull(ingressRule, "ingressRule is null");
+
         Rule rule;
-        if (input.getProtocol().equalsIgnoreCase("icmp")) {
+        if (ingressRule.getProtocol().equalsIgnoreCase("icmp")) {
             rule = Rule.builder()
                 .anySource()
-                .protocol(Protocol.valueOf(input.getProtocol().toUpperCase()))
-                .cidr(input.getCIDR())
+                .protocol(Protocol.valueOf(ingressRule.getProtocol().toUpperCase()))
+                .cidr(ingressRule.getCIDR())
                 .createRule();
         } else {
             rule = Rule.builder()
                 .anySource()
-                .protocol(Protocol.valueOf(input.getProtocol().toUpperCase()))
-                .ports(input.getStartPort(), input.getEndPort())
-                .cidr(input.getCIDR())
+                .protocol(Protocol.valueOf(ingressRule.getProtocol().toUpperCase()))
+                .ports(ingressRule.getStartPort(), ingressRule.getEndPort())
+                .cidr(ingressRule.getCIDR())
                 .createRule();
         }
         return rule;

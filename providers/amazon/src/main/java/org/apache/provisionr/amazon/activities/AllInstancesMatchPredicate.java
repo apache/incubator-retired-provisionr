@@ -18,24 +18,21 @@
 
 package org.apache.provisionr.amazon.activities;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.services.ec2.AmazonEC2;
 import com.amazonaws.services.ec2.model.DescribeInstancesRequest;
 import com.amazonaws.services.ec2.model.DescribeInstancesResult;
 import com.amazonaws.services.ec2.model.Instance;
-import org.apache.provisionr.amazon.ProcessVariables;
-import org.apache.provisionr.amazon.core.ProviderClientCache;
-import org.apache.provisionr.api.pool.Pool;
 import com.google.common.base.Optional;
+import static com.google.common.base.Preconditions.checkNotNull;
 import com.google.common.base.Predicate;
 import com.google.common.base.Throwables;
 import com.google.common.collect.Iterables;
-
 import java.util.List;
-
 import org.activiti.engine.delegate.DelegateExecution;
+import org.apache.provisionr.amazon.ProcessVariables;
+import org.apache.provisionr.amazon.core.ProviderClientCache;
+import org.apache.provisionr.api.pool.Pool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -54,9 +51,9 @@ public abstract class AllInstancesMatchPredicate extends AmazonActivity {
     }
 
     @Override
-    public void execute(AmazonEC2 client, Pool pool, DelegateExecution execution) throws Exception {
+    public void execute(AmazonEC2 client, Pool pool, DelegateExecution execution) {
         @SuppressWarnings("unchecked")
-        Optional<List<String>> instanceIds = 
+        Optional<List<String>> instanceIds =
             Optional.fromNullable((List<String>) execution.getVariable(ProcessVariables.INSTANCE_IDS));
 
         if (!instanceIds.isPresent()) {

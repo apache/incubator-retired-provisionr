@@ -82,7 +82,7 @@ public class CreatePoolCommand extends CreateCommand {
     }
 
     @Override
-    protected Object doExecute() throws Exception {
+    protected Object doExecute() {
         checkArgument(size > 0, "size should be a positive integer");
 
         Provisionr service = getService();
@@ -107,6 +107,7 @@ public class CreatePoolCommand extends CreateCommand {
             .imageId(imageId)
             .cachedImage(cachedImage)
             .createSoftware();
+
         final Hardware hardware = Hardware.builder()
             .type(hardwareType)
             .blockDevices(parseBlockDeviceOptions(blockDeviceOptions))

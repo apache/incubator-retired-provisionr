@@ -18,18 +18,14 @@
 
 package org.apache.provisionr.amazon.activities;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
 import com.amazonaws.services.ec2.AmazonEC2;
 import com.amazonaws.services.ec2.model.TerminateInstancesRequest;
+import com.google.common.base.Optional;
+import java.util.List;
+import org.activiti.engine.delegate.DelegateExecution;
 import org.apache.provisionr.amazon.ProcessVariables;
 import org.apache.provisionr.amazon.core.ProviderClientCache;
 import org.apache.provisionr.api.pool.Pool;
-import com.google.common.base.Optional;
-
-import java.util.List;
-
-import org.activiti.engine.delegate.DelegateExecution;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -47,8 +43,8 @@ public class TerminateInstances extends AmazonActivity {
     @Override
     public void execute(AmazonEC2 client, Pool pool, DelegateExecution execution) {
         @SuppressWarnings("unchecked")
-        Optional<List<String>> instanceIds = 
-                Optional.fromNullable((List<String>) execution.getVariable(ProcessVariables.INSTANCE_IDS));
+        Optional<List<String>> instanceIds =
+            Optional.fromNullable((List<String>) execution.getVariable(ProcessVariables.INSTANCE_IDS));
 
         LOG.info(">> Terminating instances: {}", instanceIds);
         if (instanceIds.isPresent() && instanceIds.get().size() > 0) {

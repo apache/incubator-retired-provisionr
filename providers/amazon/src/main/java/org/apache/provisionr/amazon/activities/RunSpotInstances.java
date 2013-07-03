@@ -30,6 +30,7 @@ import com.google.common.base.Optional;
 import com.google.common.base.Stopwatch;
 import com.google.common.collect.Lists;
 import com.google.common.util.concurrent.Uninterruptibles;
+import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.activiti.engine.delegate.DelegateExecution;
@@ -43,34 +44,35 @@ import org.slf4j.LoggerFactory;
 public class RunSpotInstances extends RunInstances {
 
     private static final Logger LOG = LoggerFactory.getLogger(RunSpotInstances.class);
-    
+
     public RunSpotInstances(ProviderClientCache cache) {
         super(cache);
     }
 
     @Override
-    public void execute(AmazonEC2 client, Pool pool, DelegateExecution execution) throws Exception {
+    public void execute(AmazonEC2 client, Pool pool, DelegateExecution execution) throws IOException {
         /* before sending a new request, we check to see if we already registered
            a launch group with the process ID, if yes, we don't re-send the request */
         final String businessKey = execution.getProcessBusinessKey();
 
         /* we timeout if requests have already been sent - the activity is being retried. */
         Optional<Object> alreadySent = Optional.fromNullable(
-                execution.getVariable(ProcessVariables.SPOT_INSTANCE_REQUEST_IDS));
+            execution.getVariable(ProcessVariables.SPOT_INSTANCE_REQUEST_IDS));
 
         if (alreadySent.isPresent()) {
             DescribeSpotInstanceRequestsRequest describeRequest = new DescribeSpotInstanceRequestsRequest()
-                    .withFilters(new Filter()
-                        .withName("launch-group").withValues(businessKey)
-                        .withName("state").withValues("open", "active"));
+                .withFilters(new Filter()
+                    .withName("launch-group").withValues(businessKey)
+                    .withName("state").withValues("open", "active"));
+
             Stopwatch stopwatch = new Stopwatch().start();
             while (stopwatch.elapsedTime(TimeUnit.MINUTES) < 2) {
                 DescribeSpotInstanceRequestsResult result = client.describeSpotInstanceRequests(describeRequest);
                 List<SpotInstanceRequest> pending = result.getSpotInstanceRequests();
                 if (pending.size() > 0) {
                     LOG.info("Not resending spot instance requests {} for businessKey: {}.", pending, businessKey);
-                    execution.setVariable(ProcessVariables.SPOT_INSTANCE_REQUEST_IDS, 
-                            collectSpotInstanceRequestIds(pending));
+                    execution.setVariable(ProcessVariables.SPOT_INSTANCE_REQUEST_IDS,
+                        collectSpotInstanceRequestIds(pending));
                     return;
                 }
                 LOG.info("The describe call has not returned anything yet, waiting 20s and retrying.");
@@ -85,7 +87,7 @@ public class RunSpotInstances extends RunInstances {
 
         execution.setVariable(ProcessVariables.SPOT_INSTANCE_REQUEST_IDS, spotInstanceRequestIds);
     }
-    
+
     private List<String> collectSpotInstanceRequestIds(List<SpotInstanceRequest> requestResponses) {
         /* Make a copy as an ArrayList to force lazy collection evaluation */
         return Lists.newArrayList(Lists.transform(requestResponses,

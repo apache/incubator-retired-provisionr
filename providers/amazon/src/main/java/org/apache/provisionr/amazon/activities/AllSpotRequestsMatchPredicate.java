@@ -18,40 +18,37 @@
 
 package org.apache.provisionr.amazon.activities;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
-import java.util.List;
-
-import org.activiti.engine.delegate.DelegateExecution;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.amazonaws.services.ec2.AmazonEC2;
 import com.amazonaws.services.ec2.model.DescribeSpotInstanceRequestsRequest;
 import com.amazonaws.services.ec2.model.DescribeSpotInstanceRequestsResult;
 import com.amazonaws.services.ec2.model.SpotInstanceRequest;
+import static com.google.common.base.Preconditions.checkNotNull;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+import java.util.List;
+import org.activiti.engine.delegate.DelegateExecution;
 import org.apache.provisionr.amazon.ProcessVariables;
 import org.apache.provisionr.amazon.core.ProviderClientCache;
 import org.apache.provisionr.api.pool.Pool;
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class AllSpotRequestsMatchPredicate extends AmazonActivity {
 
     private static final Logger LOG = LoggerFactory.getLogger(AllSpotRequestsMatchPredicate.class);
 
-    protected final String resultVariable;
+    private final String resultVariable;
     private final Predicate<SpotInstanceRequest> predicate;
 
-    protected AllSpotRequestsMatchPredicate(ProviderClientCache cache, String resultVariable, 
-            Predicate<SpotInstanceRequest> predicate) {
+    protected AllSpotRequestsMatchPredicate(ProviderClientCache cache, String resultVariable,
+                                            Predicate<SpotInstanceRequest> predicate) {
         super(cache);
         this.resultVariable = checkNotNull(resultVariable, "resultVariable is null");
         this.predicate = checkNotNull(predicate, "predicate is null");
     }
 
     @Override
-    public void execute(AmazonEC2 client, Pool pool, DelegateExecution execution) throws Exception {
+    public void execute(AmazonEC2 client, Pool pool, DelegateExecution execution) {
 
         LOG.info(">> Checking if all spot requests match predicate {}", predicate);
 

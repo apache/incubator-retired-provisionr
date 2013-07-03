@@ -18,8 +18,10 @@
 
 package org.apache.provisionr.core.logging;
 
+import com.google.common.base.Charsets;
 import static com.google.common.base.Preconditions.checkNotNull;
 import com.google.common.base.Throwables;
+import com.google.common.io.Closeables;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -54,16 +56,24 @@ public abstract class StreamLogger extends Thread {
 
     @Override
     public void run() {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+        BufferedReader bufferedReader = null;
+        InputStreamReader inputStreamReader = null;
         try {
+            inputStreamReader = new InputStreamReader(inputStream, Charsets.UTF_8);
+            bufferedReader = new BufferedReader(inputStreamReader);
+
             String line;
-            while ((line = reader.readLine()) != null) {
+            while ((line = bufferedReader.readLine()) != null) {
                 if (!line.isEmpty()) {
                     log(logger, marker, line);
                 }
             }
         } catch (IOException e) {
             throw Throwables.propagate(e);
+
+        } finally {
+            Closeables.closeQuietly(bufferedReader);
+            Closeables.closeQuietly(inputStreamReader);
         }
     }
 }

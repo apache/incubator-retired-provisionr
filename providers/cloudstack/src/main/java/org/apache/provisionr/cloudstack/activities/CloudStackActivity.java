@@ -36,15 +36,11 @@ import org.jclouds.cloudstack.CloudStackAsyncClient;
 import org.jclouds.cloudstack.CloudStackClient;
 import org.jclouds.logging.slf4j.config.SLF4JLoggingModule;
 import org.jclouds.rest.RestContext;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Base class for all activities that require access to a CloudStack based cloud.
  */
 public abstract class CloudStackActivity implements JavaDelegate {
-
-    private static final Logger LOG = LoggerFactory.getLogger(CloudStackActivity.class);
 
     /**
      * Implement activity logic in this method. It will be called with a reference to the {@link CloudStackClient}
@@ -72,8 +68,10 @@ public abstract class CloudStackActivity implements JavaDelegate {
      */
     RestContext<CloudStackClient, CloudStackAsyncClient> newCloudStackClient(Provider provider) {
         checkArgument(provider.getEndpoint().isPresent(), "please specify an endpoint for this provider");
+
         Properties overrides = new Properties();
         overrides.setProperty(Constants.PROPERTY_TRUST_ALL_CERTS, "true");
+
         return ContextBuilder.newBuilder(new CloudStackApiMetadata())
             .endpoint(provider.getEndpoint().get())
             .modules(ImmutableSet.<Module>of(new SLF4JLoggingModule()))

@@ -20,6 +20,7 @@ package org.apache.provisionr.core.templates.xml;
 
 import com.google.common.annotations.VisibleForTesting;
 import static com.google.common.base.Preconditions.checkNotNull;
+import javax.annotation.Generated;
 import javax.xml.bind.annotation.XmlAttribute;
 
 /**
@@ -63,6 +64,7 @@ public class FileEntry {
     }
 
     @Override
+    @Generated("intellij")
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -77,6 +79,7 @@ public class FileEntry {
     }
 
     @Override
+    @Generated("intellij")
     public int hashCode() {
         int result = source != null ? source.hashCode() : 0;
         result = 31 * result + (destination != null ? destination.hashCode() : 0);
@@ -84,6 +87,7 @@ public class FileEntry {
     }
 
     @Override
+    @Generated("intellij")
     public String toString() {
         return "FileEntry{" +
             "source='" + source + '\'' +
