@@ -54,7 +54,7 @@ public class ListActivitiCommand extends ActivitiCommand {
 
 
     @Override
-    protected Object doExecute() throws Exception {
+    protected Object doExecute() {
         ProcessEngine pe = this.getProcessEngine();
 
         if (pe == null) {

@@ -38,7 +38,8 @@ import org.slf4j.LoggerFactory;
 public class VirtualMachines {
 
     private static final Logger LOG = LoggerFactory.getLogger(VirtualMachines.class);
-    public static int WAIT_TIME_OUT_IN_SECONDS = 180;
+
+    public static final int WAIT_TIME_OUT_IN_SECONDS = 180;
     public static final int BETWEEN_REQUESTS_SLEEP_TIME = WAIT_TIME_OUT_IN_SECONDS / 10;
 
     private VirtualMachines() {

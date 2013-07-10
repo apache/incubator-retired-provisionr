@@ -18,7 +18,7 @@
 
 package org.apache.provisionr.cloudstack;
 
-public class ProcessVariables {
+public final class ProcessVariables {
 
     private ProcessVariables() {
         // prevent instantiation

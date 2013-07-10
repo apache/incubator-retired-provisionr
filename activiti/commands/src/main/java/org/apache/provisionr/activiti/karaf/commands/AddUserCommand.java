@@ -18,6 +18,7 @@
 
 package org.apache.provisionr.activiti.karaf.commands;
 
+import static com.google.common.base.Preconditions.checkNotNull;
 import org.activiti.engine.IdentityService;
 import org.activiti.engine.identity.User;
 import org.apache.felix.gogo.commands.Command;
@@ -40,15 +41,15 @@ public class AddUserCommand extends ActivitiCommand {
 
     @Override
     protected Object doExecute() {
-        if (getProcessEngine() == null) {
-            throw new NullPointerException("Please configure a processEngine instance for this command");
-        }
+        checkNotNull(getProcessEngine(), "No process engine found");
+
         IdentityService identityService = getProcessEngine().getIdentityService();
 
         User user = identityService.newUser(id);
-        user.setEmail(password);
-        identityService.saveUser(user);
+        user.setEmail(email);
+        user.setPassword(password);
 
+        identityService.saveUser(user);
         identityService.createMembership(id, groupId);
 
         return null;

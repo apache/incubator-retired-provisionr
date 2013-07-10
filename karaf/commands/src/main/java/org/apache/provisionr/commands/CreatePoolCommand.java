@@ -103,7 +103,7 @@ public class CreatePoolCommand extends CreateCommand {
         Provider provider = defaultProvider.get().toBuilder().options(options).createProvider();
 
         final Software software = Software.builder()
-            .packages(packages)
+            .packages(getPackages())
             .imageId(imageId)
             .cachedImage(cachedImage)
             .createSoftware();
@@ -121,10 +121,10 @@ public class CreatePoolCommand extends CreateCommand {
             .adminAccess(collectCurrentUserCredentialsForAdminAccess())
             .minSize(size)
             .expectedSize(size)
-            .bootstrapTimeInSeconds(bootstrapTimeout)
+            .bootstrapTimeInSeconds(getBootstrapTimeout())
             .createPool();
 
-        return template != null ? applyTemplate(pool) : pool;
+        return getTemplate() != null ? applyTemplate(pool) : pool;
     }
 
     private List<BlockDevice> parseBlockDeviceOptions(List<String> options) {

@@ -47,18 +47,18 @@ import org.apache.provisionr.core.templates.PoolTemplate;
 public abstract class CreateCommand extends OsgiCommandSupport {
 
     @Option(name = "--id", description = "Service ID (use provisionr:services)", required = true)
-    protected String id;
+    private String id;
 
     @Option(name = "--package", description = "Package to install by default (multi-valued)",
         multiValued = true)
-    protected List<String> packages = Lists.newArrayList();
+    private List<String> packages = Lists.newArrayList();
 
     @Option(name = "-t", aliases = "--template", description = "Pre-configured template (packages, files)")
-    protected String template;
+    private String template;
 
     @Option(name = "--timeout", description = "Timeout in seconds for the command's initialization steps. " +
         "If not specified, defaults to 600 seconds.")
-    protected int bootstrapTimeout = 600;
+    private int bootstrapTimeout = 600;
 
     @Option(name = "--public-key-path", description = "Path to the public key. " +
         "The default value can be overridden in org.apache.provisionr.core")
@@ -68,9 +68,9 @@ public abstract class CreateCommand extends OsgiCommandSupport {
         "The default value can be overridden in org.apache.provisionr.core")
     private String privateKeyPath;
 
-    protected final List<Provisionr> services;
+    private final List<Provisionr> services;
 
-    protected final List<PoolTemplate> templates;
+    private final List<PoolTemplate> templates;
 
     public CreateCommand(List<Provisionr> services, List<PoolTemplate> templates,
                          String publicKeyPath, String privateKeyPath) {
@@ -79,6 +79,22 @@ public abstract class CreateCommand extends OsgiCommandSupport {
 
         this.publicKeyPath = checkNotNull(publicKeyPath, "publicKeyPath is null");
         this.privateKeyPath = checkNotNull(privateKeyPath, "privateKeyPath is null");
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public List<String> getPackages() {
+        return packages;
+    }
+
+    public String getTemplate() {
+        return template;
+    }
+
+    public int getBootstrapTimeout() {
+        return bootstrapTimeout;
     }
 
     @VisibleForTesting

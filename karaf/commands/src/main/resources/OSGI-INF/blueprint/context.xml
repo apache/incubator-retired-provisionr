@@ -64,6 +64,14 @@
                 <shell:argument value="${privateKeyPath}"/>
             </shell:action>
         </shell:command>
+        <shell:command name="provisionr/create-image">
+            <shell:action class="org.apache.provisionr.commands.CreateImageCommand">
+                <shell:argument ref="provisionrServices"/>
+                <shell:argument ref="templates"/>
+                <shell:argument value="${publicKeyPath}"/>
+                <shell:argument value="${privateKeyPath}"/>
+            </shell:action>
+        </shell:command>
         <shell:command name="provisionr/destroy">
             <shell:action class="org.apache.provisionr.commands.DestroyPoolCommand">
                 <shell:argument ref="provisionrServices"/>

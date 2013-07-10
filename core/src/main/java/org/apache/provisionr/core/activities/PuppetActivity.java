@@ -20,6 +20,7 @@ package org.apache.provisionr.core.activities;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import com.google.common.collect.ImmutableMap;
+import java.io.IOException;
 import java.util.Map;
 import net.schmizz.sshj.SSHClient;
 import net.schmizz.sshj.connection.channel.direct.Session;
@@ -79,7 +80,7 @@ public abstract class PuppetActivity implements JavaDelegate {
     }
 
     @Override
-    public void execute(DelegateExecution execution) throws Exception {
+    public void execute(DelegateExecution execution) throws IOException {
         Pool pool = (Pool) execution.getVariable(CoreProcessVariables.POOL);
         checkNotNull(pool, "Please add the pool description as a process " +
             "variable with the name '%s'.", CoreProcessVariables.POOL);

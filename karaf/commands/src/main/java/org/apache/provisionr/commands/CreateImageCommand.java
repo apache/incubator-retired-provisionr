@@ -40,18 +40,14 @@ public class CreateImageCommand extends CreateCommand {
     }
 
     @Override
-    protected Object doExecute() throws Exception {
-        // Provisionr service = getService();
-        // final Pool pool = createPoolOfOne(service);
-        // TODO: create service.startCachingProcess(uuid, pool) in the Provisionr class
-
-        return null;
+    protected Object doExecute() {
+        return "Not implemented.";
     }
 
     @VisibleForTesting
     Pool createPoolOfOne(Provisionr service) {
 
-        final Software software = Software.builder().packages(packages).createSoftware();
+        final Software software = Software.builder().packages(getPackages()).createSoftware();
         final Hardware hardware = Hardware.builder().type(HARDWARE_TYPE).createHardware();
 
         final Pool pool = Pool.builder()
@@ -62,10 +58,10 @@ public class CreateImageCommand extends CreateCommand {
             .adminAccess(collectCurrentUserCredentialsForAdminAccess())
             .minSize(1)
             .expectedSize(1)
-            .bootstrapTimeInSeconds(bootstrapTimeout)
+            .bootstrapTimeInSeconds(getBootstrapTimeout())
             .createPool();
 
-        return template != null ? applyTemplate(pool) : pool;
+        return getTemplate() != null ? applyTemplate(pool) : pool;
 
     }
 
