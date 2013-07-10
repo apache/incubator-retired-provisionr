@@ -28,10 +28,10 @@
     <fileSets>
         <fileSet>
             <directory>${project.basedir}/../../</directory>
-            <useDefaultExcludes>true</useDefaultExcludes>
+            <useDefaultExcludes>false</useDefaultExcludes>
             <excludes>
                 <exclude>**/.project</exclude>
-                <exclude>**/.gitignore</exclude>
+                <exclude>.git/**</exclude>
                 <exclude>**/${project.build.directory}/**</exclude>
                 <exclude>**/dependency-reduced-pom.xml</exclude>
                 <exclude>**/*.log</exclude>
