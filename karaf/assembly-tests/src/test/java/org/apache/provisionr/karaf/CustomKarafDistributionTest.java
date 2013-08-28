@@ -26,8 +26,11 @@ import java.io.InputStreamReader;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.URL;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
+
+import com.google.common.io.Resources;
 import org.apache.karaf.features.Feature;
 import org.apache.karaf.features.FeaturesService;
 import static org.apache.karaf.tooling.exam.options.KarafDistributionOption.karafDistributionConfiguration;
@@ -44,6 +47,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.ops4j.pax.exam.CoreOptions.junitBundles;
 import static org.ops4j.pax.exam.CoreOptions.maven;
+
+import org.ops4j.pax.exam.MavenUtils;
 import org.ops4j.pax.exam.Option;
 import org.ops4j.pax.exam.junit.Configuration;
 import org.ops4j.pax.exam.junit.ExamReactorStrategy;
@@ -93,12 +98,17 @@ public class CustomKarafDistributionTest {
 
     @Configuration
     public Option[] configuration() throws Exception {
-        MavenArtifactUrlReference distributionUrl = maven().groupId("org.apache.provisionr")
-            .artifactId("provisionr-assembly").versionAsInProject().type("tar.gz");
+        String projectVersion = MavenUtils.asInProject().getVersion("org.apache.provisionr", "provisionr-assembly");
+
+        Properties testProperties = new Properties();
+        testProperties.load(Resources.getResource(CustomKarafDistributionTest.class, "maven.properties").openStream());
+
+        File customDistribution = new File(testProperties.getProperty("module.root"),
+                "../assembly/target/provisionr-" + projectVersion + ".tar.gz");
 
         return new Option[]{
             karafDistributionConfiguration()
-                .frameworkUrl(distributionUrl)
+                .frameworkUrl(customDistribution.toURI().toString())
                 .karafVersion(getKarafVersionAsInProject())
                 .name("Apache Provisionr")
                 .unpackDirectory(new File("target/exam")),
